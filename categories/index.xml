@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Casually Typing Like a Monkey</title>
+    <link>https://bundy.im/categories/</link>
+    <description>Recent content in Categories on Casually Typing Like a Monkey</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	<atom:link href="https://bundy.im/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Programming</title>
+      <link>https://bundy.im/categories/programming/</link>
+      <pubDate>Fri, 27 Apr 2018 13:35:25 +0800</pubDate>
+      
+      <guid>https://bundy.im/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

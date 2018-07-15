@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Makefile 基础教程 - Casually Typing Like a Monkey</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Bundy" />
+  <meta name="description" content=" 本文内容来自对 isaacs/Makefile 的翻译、修改和补充。
+ Hello, 这是个 Makefile 的基础教程。 你将在这学到为什么 make 命令如此受欢迎。尽管它有着奇怪的语法，但实际上它的表达能力强而且高效，应对构建程序任务时它是个强有力的解决方案。 " />
+<meta name="keywords" content="makefile, tutorial" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.42.1" />
+
+
+<link rel="canonical" href="https://bundy.im/post/makefile-basic-tutorial/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.1.1" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+
+
+<meta property="og:title" content="Makefile 基础教程" />
+<meta property="og:description" content="
+本文内容来自对 isaacs/Makefile 的翻译、修改和补充。
+
+
+Hello, 这是个 Makefile 的基础教程。
+你将在这学到为什么 make 命令如此受欢迎。尽管它有着奇怪的语法，但实际上它的表达能力强而且高效，应对构建程序任务时它是个强有力的解决方案。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bundy.im/post/makefile-basic-tutorial/" />
+
+
+
+<meta property="article:published_time" content="2018-04-27T13:35:25&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-04-27T13:35:25&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Makefile 基础教程">
+<meta itemprop="description" content="
+本文内容来自对 isaacs/Makefile 的翻译、修改和补充。
+
+
+Hello, 这是个 Makefile 的基础教程。
+你将在这学到为什么 make 命令如此受欢迎。尽管它有着奇怪的语法，但实际上它的表达能力强而且高效，应对构建程序任务时它是个强有力的解决方案。
+">
+
+
+<meta itemprop="datePublished" content="2018-04-27T13:35:25&#43;08:00" />
+<meta itemprop="dateModified" content="2018-04-27T13:35:25&#43;08:00" />
+<meta itemprop="wordCount" content="3888">
+
+
+
+<meta itemprop="keywords" content="Makefile," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Makefile 基础教程"/>
+<meta name="twitter:description" content="
+本文内容来自对 isaacs/Makefile 的翻译、修改和补充。
+
+
+Hello, 这是个 Makefile 的基础教程。
+你将在这学到为什么 make 命令如此受欢迎。尽管它有着奇怪的语法，但实际上它的表达能力强而且高效，应对构建程序任务时它是个强有力的解决方案。
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Casually Typing Like a Monkey</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Casually Typing Like a Monkey</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Makefile 基础教程</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-04-27 </span>
+        <div class="post-category">
+            
+              <a href="/categories/programming/"> Programming </a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#我们开始吧">我们开始吧</a>
+<ul>
+<li><a href="#自动变量-automatic-variables">自动变量（Automatic Variables）</a></li>
+<li><a href="#函数-functions">函数（Functions）</a></li>
+</ul></li>
+<li><a href="#有一些补充">有一些补充</a>
+<ul>
+<li><a href="#make-kitty">make kitty</a></li>
+<li><a href="#赋值符">赋值符</a></li>
+<li><a href="#环境变量">环境变量</a></li>
+<li><a href="#小坑">小坑</a></li>
+</ul></li>
+<li><a href="#还有一件事">还有一件事</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    
+
+    
+    <div class="post-content">
+      <blockquote>
+<p>本文内容来自对 <a href="https://gist.github.com/isaacs/62a2d1825d04437c6f08">isaacs/Makefile</a> 的翻译、修改和补充。</p>
+</blockquote>
+
+<p>Hello, 这是个 <code>Makefile</code> 的基础教程。
+你将在这学到为什么 <code>make</code> 命令如此受欢迎。尽管它有着奇怪的语法，但实际上它的表达能力强而且高效，应对构建程序任务时它是个强有力的解决方案。
+</p>
+
+<h1 id="我们开始吧">我们开始吧</h1>
+
+<p>你需要在含有 <code>Makefile</code> 文件的文件夹中使用 <code>make</code> 命令，也可以使用 <code>make -f &lt;makefile&gt;</code> 指定不同的文件名。
+<code>Makefile</code> 是一堆规则（rules）的集合。每个规则表明了要做的事情，比如 <code>grunt task</code> 或者 <code>npm package.json</code> 之类的。</p>
+
+<p>一条规则的语法如下：</p>
+
+<pre><code>&lt;target&gt;: &lt;prerequisites...&gt;
+  &lt;commands&gt;
+</code></pre>
+
+<p>目标（target）是必需的。前置条件（prerequisites）和命令（commands）都是可选，但两者之间至少存在一个。
+下面是一个示例，用 <code>make</code> 命令试试看会发生什么：</p>
+
+<pre><code class="language-makefile">tutorial:
+	@# todo: have this actually run some kind of tutorial wizard?
+	@echo &quot;Please read the 'Makefile' file to go through this tutorial&quot;
+</code></pre>
+
+<p>一般来说，如果 <code>make</code> 没有指定目标，那么它会选择运行第一个目标，所以在这个情况下输入 <code>make</code> 和 <code>make tutorial</code> 是一样的结果。</p>
+
+<p>默认情况下，命令在执行前命令本身会被先打印出来，这样你就能看到当前是什么命令在运行。虽然这背离了 &ldquo;success should be silent&rdquo; 的 UNIX 教条，但不这么做的话，你很难从构建日志中看出当前在执行的命令。
+想要关掉这个默认输出的话，我们可以在每条命令前加上 <code>@</code> 符号。</p>
+
+<p>每条命令都会分别调用 <code>shell</code>，所以如果你在直接在上一个命令中设置了变量，这个变量将不会出现在下一个命令中。你可以试着输入 <code>make var-lost</code> 看下一个示例会发生什么：</p>
+
+<pre><code class="language-makefile">var-lost:
+	export foo=bar
+	echo &quot;foo=[$$foo]&quot;
+</code></pre>
+
+<p>你可能注意到了刚才的命令中我们用了两个 <code>$</code>，这是因为每行 <code>Makefile</code> 都会被 <code>make</code> 转义后再传入 <code>shell</code>。至于为什么转义 <code>$</code>，下文会有解释~</p>
+
+<p>我们可以通过在命令结尾加 <code>\</code> 来让两个命令同一个 <code>shell</code> 执行，试着输入 <code>make var-kept</code>：</p>
+
+<pre><code class="language-makefile">var-kept:
+	export foo=bar; \
+	echo &quot;foo=[$$foo]&quot;
+</code></pre>
+
+<p>接下来让我们开始加入依赖吧。在这个示例中，我们将会依赖 <strong>source.txt</strong> 并创建一个新的文件 <strong>result.txt</strong>：</p>
+
+<pre><code class="language-makefile">result.txt: source.txt
+	@echo &quot;building result.txt from source.txt&quot;
+	cp source.txt result.txt
+</code></pre>
+
+<p>输入试试看 <code>make result.txt</code>。Oops&hellip;我们出现了错误：</p>
+
+<pre><code class="language-bash">$ make result.txt
+make: *** No rule to make target `source.txt', needed by `result.txt'.  Stop.
+</code></pre>
+
+<p>看起来问题来源于我们试图<strong>依赖</strong> <strong>source.txt</strong> 创建 <strong>result.txt</strong>，但我们没有告诉 <code>make</code> 怎么去拿到 <strong>source.txt</strong>，而该文件也不在 <code>make</code> 运行的目录下（如果你没有事先创建的话~）。
+我们可以加入一个目标作为依赖生成 <strong>source.txt</strong>：</p>
+
+<pre><code class="language-makefile">source.txt:
+	@echo &quot;building source.txt&quot;
+  echo &quot;this is the source&quot; &gt; source.txt
+</code></pre>
+
+<p>输入 <code>make result.txt</code> 将会先创建 <strong>source.txt</strong> 然后复制出 <strong>result.txt</strong>，试着再一次执行 <code>make result.txt</code>，你会发现什么都没发生。因为它的依赖 <strong>source.txt</strong> 没有发生改变，所以也就没有必要重新构建一次 <code>result.txt</code>。</p>
+
+<p>执行 <code>touch source.txt</code>，并编辑它，你会发现 <code>make result.txt</code> 又会开始重新构建。</p>
+
+<p>试想一下假如我们在一个项目中需要100个 <strong>.c</strong> 文件，编译成与之相对的 <strong>.o</strong> 文件，然后把这些 <strong>.o</strong> 链接到二进制文件中。（这个和将100个 <strong>.style</strong> 变成 <strong>.css</strong>，再将他们组合到一起成为 <strong>main.main.css</strong>）一条一条的创建规则简直就是一场灾难。</p>
+
+<p>好在 <code>make</code> 可以简化这些。通过创建一条通用的规则匹配任何符合模式的文件。然后声明另外一种匹配模式来作转换。</p>
+
+<h2 id="自动变量-automatic-variables">自动变量（Automatic Variables）</h2>
+
+<p>我们可以使用一些特殊的语法来适配输入和输出文件。下面是一些自动变量（Automatic Variables），它们的值与当前规则有关：</p>
+
+<ul>
+<li><code>$@</code>  指代当前的目标，你可以把它当作 <code>shell</code> 脚本中的 <code>$@</code>。<code>@</code> 就像是 <code>arguments</code> 的首字母 <code>a</code> 一样。当你输入 <code>make foo</code>，<code>foo</code> 就是参数。</li>
+<li><code>$&lt;</code>  指代第一个前置条件。你可以把 <code>&lt;</code> 当作 <code>shell</code> 中的输入管道。就像 <code>head &lt; foo.txt</code> 把 <strong>foo.txt</strong> 的内容当作输入。</li>
+<li><code>$^</code>  指代不止是指代第一个前置条件，而是全部的前置条件。你可以把它当作 <code>@^</code> 来记忆，他们只是方向不一样（<strong>&lt;</strong> 和 <strong>^</strong> 的区别~）。如果一个文件出于一些原因多次出现在前置条件中，在 <code>$^</code> 中仍然只会显示一次。</li>
+<li><code>$?</code>  指代比目标新的所有前置条件。<code>$?</code> 就像一个问题，”等一下，为什么你要这么干？什么文件发生了改动？“</li>
+<li><code>$$</code>  指代字面意思上的 <code>$</code> 符号，<del>更多的美元符号等于更多的现金等于美元符号</del>（有点拗口）</li>
+<li><code>$*</code>  指代 <code>%</code> 符号匹配到的部分。（下面会有示例具体说明）</li>
+</ul>
+
+<p>你也可以使用特殊语法 <code>$(@D)</code> 和 <code>$(@F)</code> 分别指向 <code>$@</code> 的目录名和文件名。<code>$(&lt;D)</code> 和 <code>$(&lt;F)</code> 对于 <code>$&lt;</code> 也是一样的意思。你可以把 <code>D/F</code> 这个技巧用在任何自动变量上。
+还有一些其他的自动变量，不过那些变量大多你都用不到，先放在一边。</p>
+
+<p>我们可以用这些变量，拿到我们想要的数据，比如目标和依赖条件的值:</p>
+
+<pre><code class="language-makefile">result-using-var.txt: source.txt
+    @echo &quot;buildling result-using-var.txt using the $$&lt; and \$$@ vars&quot;
+    cp $&lt; $@
+</code></pre>
+
+<p>虽然方便了许多，但比起一个一个的列出它们，我们可以用一点 <strong>shell</strong> 脚本生成他们，并放入变量中。</p>
+
+<h2 id="函数-functions">函数（Functions）</h2>
+
+<p><code>make</code> 提供一些内置函数帮助我们完成更加复杂的任务，这边我们只列出几个，这也是本文例子中会用到或提及的:</p>
+
+<ul>
+<li><code>shell</code> 函数。 用来执行 <code>shell</code> 命令</li>
+<li><code>wildcard</code> 函数。 列出与模式相匹配的路径，像这样 <code>$(wildcard *.c)</code></li>
+<li><code>patsubst</code> 函数。 用于模式匹配的替换，语法为 <code>$(patsubst pattern,replacement,text)</code></li>
+</ul>
+
+<p>同时，通常情况下你应该使用 <code>$(wildcard src/*.txt)</code> 因为一般来说项目中已经存在这些文件了。不过这是一个教程，而我们想用它来生成文件。</p>
+
+<p>这将会用 <code>shell</code> 生成一个文件名列表:</p>
+
+<pre><code class="language-makefile">srcfiles := $(shell echo src/{00..99}.txt)
+</code></pre>
+
+<p>那么我们怎么在 <strong>src</strong> 文件夹中创建这些文件呢？
+我们可以使用 <code>%</code> 占位符来表示&rdquo;所有文件路径为 <strong>src/*.txt</strong> 格式的文件名&rdquo;然后将这些匹配到的文件名会被放入 <code>$*</code> 变量中。</p>
+
+<pre><code class="language-makefile">src/%.txt:
+	@# First things first, create the dir if it doesn't exist.
+	@# Prepend with @ because srsly who cares about dir creation
+	@[ -d src ] || mkdir src
+	@# then, we just echo some data into the file
+	@# The $* expands to the &quot;stem&quot; bit matched by %
+	@# So, we get a bunch of files with numeric names, containing their number
+	echo $* &gt; $@
+</code></pre>
+
+<p>试着运行 <code>make src/00.txt</code> 和 <code>make src/01.txt</code> 看看结果。文件被创建出来了。</p>
+
+<p>不过为了不每个文件都 <code>make</code> 一次，我们应该定义一个&rdquo;伪（phony）&rdquo;目标依赖所有我们需要创建的源文件。（在使用伪目标时，或者依赖它时，<code>make</code> 就不会检查这个目标文件是否真正存在。毕竟如果目录下有个文件和目标相同的话，<code>make</code> 会认为没有必要重新构建，导致不会执行命令。）</p>
+
+<p>这时我们运行 <code>make source</code> 会在 <strong>src/</strong> 下创建所有的文件。首先它会把 <strong>srcfiles</strong> 变量中的路径当作前置条件，接着 <code>src/%.txt</code> 目标会与之匹配。于是便会执行匹配到的目标，创建 <strong>src/</strong> 文件夹，并输出匹配的字段到文件中。试着运行 <code>make source</code> 看看结果把:</p>
+
+<pre><code class="language-makefile">.PHONY: source
+source: $(srcfiles)
+</code></pre>
+
+<p>源文件有了，现在是时候创建结果文件了，当然，我们得先创建结果文件夹。可能你想匹配所有的源文件，然后用它来创建结果文件:</p>
+
+<pre><code class="language-makefile">dest/%.txt: src/%.txt
+  @[ -d dest ] || mkdir dest
+	cp $&lt; $@
+</code></pre>
+
+<p>非常好，但这需要我们执行 <code>make dest/#.txt</code> 100次！唔。。我猜应该没人会想这么干。</p>
+
+<p>我们还需要再补充点东西。
+看起来我们应该创建一个伪目标依赖所有的结果文件，就像依赖所以的目标文件一样。</p>
+
+<p>这一次我们可以使用内置的 <code>patsubst</code> 函数，它会把所有的源文件路径替换结果标文件路径，这样我们可以不用重建一个结果文件列表（就像 <strong>srcfiles</strong> 一样）。</p>
+
+<pre><code class="language-makefile">destfiles := $(patsubst src/%.txt,dest/%.txt,$(srcfiles))
+.PHONY: destination
+destination: $(destfiles)
+</code></pre>
+
+<p>既然 <strong>destination</strong> 不是一个真正的文件名，我们应该把它定义为伪目标。使用<code>.PHONY</code> 声明伪目标是一个好习惯。</p>
+
+<p>现在，让我们把这些结果文件名合在一起&rdquo;编译&rdquo;把，使用 <code>cat</code> 命令来演示这个效果:</p>
+
+<pre><code class="language-makefile">kitty: $(destfiles)
+	@# Remember, $&lt; is the input file, but $^ is ALL the input files.
+	@# Cat them into the kitty.
+	cat $^ &gt; kitty
+</code></pre>
+
+<p>执行 <code>make kitty</code> 看看会发生什么。
+每个结果文件都被创建了出来，而且 <strong>kitty</strong> 文明中出现了每个结果文件的名字。如果再运行 <code>make kitty</code>，它会说 &ldquo;kitty is up to date&rdquo;。</p>
+
+<p>如果你像这样 <code>touch src/25.txt; make kitty</code>改动了某个源文件，然后执行 <code>make kitty</code>，神奇的事情出现了!
+你会发现 <code>make</code> 很聪明，它只会对更改过的源文件 <strong>25.txt</strong> 产生反应，重建与之对应的结果文件，并重新&rdquo;编译&rdquo;到 <strong>kitty</strong> 中。它不会每次都重写生成源文件，再重新生成结果文件。</p>
+
+<p>在 <code>Makefile</code> 中写一个 <strong>test</strong> 目标是一个好习惯，因为大家会参与你的项目中，如果你的项目里有 <code>Makefile</code> 的话，他们会希望能用 <code>make test</code> 做一些事情。
+当然没有 <strong>kitty</strong> 的话是不能跑测试的，所以我们需要依赖它:</p>
+
+<pre><code class="language-makefile">.PHONY: test
+test: kitty
+	@echo &quot;miao&quot; &amp;&amp; echo &quot;tests all pass!&quot;
+</code></pre>
+
+<p>最后，<code>make clean</code> 需要总是能移除你用 <code>Makefile</code> 创建出来的东西，这样我们就可以移除一些过期的&rdquo;坏东西&rdquo;。</p>
+
+<pre><code class="language-makefile">.PHONY: clean
+clean:
+	rm -rf *.txt src dest kitty
+</code></pre>
+
+<p>如果出错的话会发生什么事情呢？打个比方你在构建东西，然后一条命令失败了，那么 <code>make</code> 会终止并且拒绝执行接下来的命令，返回一个非零的错误码。
+为了示范这个操作，试着执行下面这段&rdquo;坏猫猫&rdquo;规则，它会退出且返回错误码为1。</p>
+
+<pre><code class="language-makefile">.PHONY: badkitty
+badkitty:
+	$(MAKE) kitty # The special var $(MAKE) means &quot;the make currently in use&quot;
+	false # &lt;-- this will fail
+	echo &quot;should not get here&quot;
+</code></pre>
+
+<hr />
+
+<h1 id="有一些补充">有一些补充</h1>
+
+<h2 id="make-kitty">make kitty</h2>
+
+<p>我把上面提到的一些示例整合到了一起，你可以直接试试 <code>make kitty</code> ~</p>
+
+<pre><code class="language-makefile">srcfiles := $(shell echo src/{00..99}.txt)
+destfiles := $(patsubst src/%.txt,dest/%.txt,$(srcfiles))
+
+src/%.txt:
+	@# First things first, create the dir if it doesn't exist.
+	@# Prepend with @ because srsly who cares about dir creation
+	@[ -d src ] || mkdir src
+	@# then, we just echo some data into the file
+	@# The $* expands to the &quot;stem&quot; bit matched by %
+	@# So, we get a bunch of files with numeric names, containing their number
+	echo $* &gt; $@
+
+dest/%.txt: src/%.txt
+	@[ -d dest ] || mkdir dest
+	cp $&lt; $@
+	
+.PHONY: source
+source: $(srcfiles)
+
+.PHONY: destination
+destination: $(destfiles)
+
+kitty: $(destfiles)
+	@# Remember, $&lt; is the input file, but $^ is ALL the input files.
+	@# Cat them into the kitty.
+	cat $^ &gt; kitty
+
+.PHONY: test
+test: kitty
+	@echo &quot;miao&quot; &amp;&amp; echo &quot;tests all pass!&quot;
+
+.PHONY: clean
+clean:
+	rm -rf src dest kitty
+</code></pre>
+
+<h2 id="赋值符">赋值符</h2>
+
+<p>变量可以指向另外一个变量。</p>
+
+<pre><code class="language-makefile">foo = $(bar)
+</code></pre>
+
+<p><code>Makefile</code> 提供四种赋值符，区别如下:
+- VARIABLE = value
+懒惰赋值。在执行的时候递归的获取值。也是赋值默认的行为。
+- VARIABLE := value
+立即赋值。定义变量时就赋好值，不会随着 <strong>value</strong> 的变更而发生变更
+- VARIABLE ?= value
+为空赋值。如果 <strong>VARIABLE</strong> 为空，赋值。
+- VARIABLE += value
+追加赋值。将值追加到变量的末尾。</p>
+
+<p>下面是个示例展示他们的区别:</p>
+
+<pre><code class="language-makefile">foo = &quot;foo&quot;
+a = $(foo)
+b := $(foo)
+c ?= $(foo)
+d += $(foo)
+d += $(foo)
+foo = &quot;bar&quot;
+
+echo:
+    @echo a = $(a)
+    @echo b = $(b)
+    @echo c = $(c)
+    @echo d = $(d)
+</code></pre>
+
+<p><code>make echo</code> 结果:</p>
+
+<pre><code class="language-code">a = bar
+b = foo
+c = bar
+d = bar bar
+</code></pre>
+
+<h2 id="环境变量">环境变量</h2>
+
+<p>你可以在 <code>Makefile</code> 中直接引入环境变量，也可以定义新的全局环境变量：</p>
+
+<pre><code class="language-makefile">export FOO=${PATH}:/foo/bin
+
+.PHONY: env
+env:
+    echo $$FOO
+</code></pre>
+
+<p>这个示例会创建一个全局的环境变量 <strong>FOO</strong> ，可以在任何命令中使用。不过由于每个命令都是新的 <code>shell</code> ，所以在命令中更改这些环境变量，其他的命令中是看不到更改效果的。</p>
+
+<p>示例中引用的环境变量 <strong>PATH</strong> 如果不存在于调用 <code>make</code> 的 <code>shell</code> 中，也可以通过 <code>make PATH=&quot;bar&quot; env</code> 来指明 <strong>PATH</strong> 的值。</p>
+
+<h2 id="小坑">小坑</h2>
+
+<p><code>Makefile</code> 对 <strong>tab</strong> 很执着，如果缩进的时候用了空格会报错的哦</p>
+
+<pre><code class="language-output">Makefile:3: *** missing separator.  Stop.
+</code></pre>
+
+<p>你可以用 <code>cat -e -t -v Makefile</code> 来检查用了空格还是 <strong>tab</strong>。</p>
+
+<pre><code class="language-output">test:$
+^I@echo tab$
+    @echo space$
+</code></pre>
+
+<p>命令前面有 <strong>^I</strong> 的就是 <strong>tab</strong>，没有的就是空格。</p>
+
+<h1 id="还有一件事">还有一件事</h1>
+
+<p>想必你已经大致的了解到了 <code>Makefile</code>，以及它能干什么。想进一步了解 <code>Makefile</code>？可以去看看它的官方手册<a href="http://www.gnu.org/software/make/manual/make.html">GNU make</a>~</p>
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Bundy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2018-04-27</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/makefile/">Makefile</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/theme-preview/">
+            <span class="next-text nav-default">Theme Preview</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'bundy-im';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/XSAM" class="iconfont icon-github" title="github"></a>
+  <a href="https://bundy.im/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Bundy</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" src="/dist/even.min.js?v=3.1.1"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118384635-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?f417c49f144c845ef0d3f1452e3f8103";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+
+</body>
+</html>
