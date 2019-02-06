@@ -6,10 +6,19 @@
     <description>Recent content on Casually Typing Like a Monkey</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 27 Apr 2018 13:35:25 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 Feb 2019 15:13:09 +0800</lastBuildDate>
     
 	<atom:link href="https://bundy.im/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>tmux 简易指南（一）</title>
+      <link>https://bundy.im/post/tmux-guide-1/</link>
+      <pubDate>Wed, 06 Feb 2019 15:13:09 +0800</pubDate>
+      
+      <guid>https://bundy.im/post/tmux-guide-1/</guid>
+      <description>用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。会话的快速</description>
+    </item>
     
     <item>
       <title>Makefile 基础教程</title>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>tmux 简易指南（一） - Casually Typing Like a Monkey</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Bundy" />
+  <meta name="description" content="用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。会话的快速" />
+<meta name="keywords" content="tmux, guide" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.42.1" />
+
+
+<link rel="canonical" href="https://bundy.im/post/tmux-guide-1/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.1.1" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+
+
+<meta property="og:title" content="tmux 简易指南（一）" />
+<meta property="og:description" content="用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。会话的快速" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bundy.im/post/tmux-guide-1/" />
+
+
+
+<meta property="article:published_time" content="2019-02-06T15:13:09&#43;08:00"/>
+
+<meta property="article:modified_time" content="2019-02-06T15:13:09&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="tmux 简易指南（一）">
+<meta itemprop="description" content="用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。会话的快速">
+
+
+<meta itemprop="datePublished" content="2019-02-06T15:13:09&#43;08:00" />
+<meta itemprop="dateModified" content="2019-02-06T15:13:09&#43;08:00" />
+<meta itemprop="wordCount" content="1669">
+
+
+
+<meta itemprop="keywords" content="tmux," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="tmux 简易指南（一）"/>
+<meta name="twitter:description" content="用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。会话的快速"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Casually Typing Like a Monkey</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Casually Typing Like a Monkey</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">tmux 简易指南（一）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-02-06 </span>
+        <div class="post-category">
+            
+              <a href="/categories/programming/"> Programming </a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#那么-什么是-tmux-呢">那么，什么是 tmux 呢？</a></li>
+<li><a href="#概念">概念</a></li>
+<li><a href="#开始吧">开始吧</a>
+<ul>
+<li><a href="#安装">安装</a></li>
+<li><a href="#玩耍时间">玩耍时间！</a>
+<ul>
+<li><a href="#创建-session">创建 session</a></li>
+<li><a href="#创建-pane">创建 pane</a></li>
+<li><a href="#切换-pane">切换 pane</a></li>
+<li><a href="#退出-pane">退出 pane</a></li>
+<li><a href="#创建-window">创建 window</a></li>
+<li><a href="#切换-window">切换 window</a></li>
+<li><a href="#detach-session">detach session</a></li>
+</ul></li>
+<li><a href="#tmux-cheatsheet">tmux cheatsheet</a></li>
+</ul></li>
+<li><a href="#最后">最后</a></li>
+<li><a href="#ref">Ref</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    
+
+    
+    <div class="post-content">
+      
+
+<p>用了 <em>tmux</em> 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。会话的快速切换也能在需要管理多个项目时让整个流程变得非常的顺畅。在快速切换这方面 tmux 就像是终端中的窗口管理软件，对应到图形界面好比 macOS 下的窗口切换软件 <a href="https://contexts.co/">Context</a>。（稍微改造一番后，甚至连操作都很像）</p>
+
+<h1 id="那么-什么是-tmux-呢">那么，什么是 tmux 呢？</h1>
+
+<p><img src="https://i.loli.net/2019/02/06/5c5a9390261f6.jpg" alt="tmux-sample.jpg" /></p>
+
+<blockquote>
+<p><strong>tmux</strong> is a terminal multiplexer: it enables a number of terminals to be created, accessed, and controlled from a single screen. tmux may be detached from a screen and continue running in the background, then later reattached.</p>
+</blockquote>
+
+<p><em>tmux</em> 主要提供两个功能：<em>会话管理（Session Management）</em> 和 <em>窗口管理（Window Management）</em> 。</p>
+
+<p><em>会话管理</em> 可以让你管理多个 <em>tty</em> ，<em>tmux</em> 会让这些 <em>tty</em> 始终保持运行，直到被手动关闭或 <em>tmux server</em> 被 kill。在 ssh 一台远程机器的时候极为有用，ssh 连接意外断开时，<em>tmux</em> 中的 <em>tty</em> 不会受到影响而停止当前工作，当重新 ssh 连接上来时，还能继续工作。</p>
+
+<p><em>窗口管理</em> 可以让你以多种方式显示 <em>tty</em> ，比如每个窗口都有不同的 <em>tty</em> ，切换窗口的时候显示的 <em>tty</em> 也会一起切换。</p>
+
+<p>如果你熟悉 <a href="https://www.gnu.org/software/screen/manual/screen.html">Screen</a> 的话，你可以把 <em>tmux</em> 当成是 <em>Screen</em> 的加强版（至少我是这么认为的 hhhh）。</p>
+
+<h1 id="概念">概念</h1>
+
+<p>先介绍几个小概念可以方便我们理解 <em>tmux</em> ：<em>session</em>, <em>window</em>, <em>pane</em></p>
+
+<ul>
+<li><strong>session</strong>: 是一堆 <em>tty</em> 的集合。一个 <em>session</em> 下可以有多个 <em>window</em> 。</li>
+<li><strong>window</strong>: 会占据一整个终端显示。而一个 <em>window</em> 可以被切分为多个 <em>pane</em> 。</li>
+<li><strong>pane</strong>: 每个 <em>pane</em> 都是一个 <em>tty</em> 。</li>
+</ul>
+
+
+<figure class="center">
+    
+        <img src="https://i.loli.net/2019/02/06/5c5abd440b8f4.jpg" alt="tmux session" />
+    
+    
+    <figcaption>
+        <h4>tmux session</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>然后，每个 <em>tmux</em> 都可以连接到同一个 <em>session</em> ，甚至可以同时操作。（在同一开发机上的话，简直是结对编程神器呀）</p>
+
+<h1 id="开始吧">开始吧</h1>
+
+<h2 id="安装">安装</h2>
+
+<p>我会用一些比较新的功能，用的版本是 <code>tmux 2.8</code>（其实 2.6 以上即可），所以虽然 <em>tmux</em> 可以从包管理工具里面直接安装，但我一般选择自己编译。</p>
+
+<pre><code class="language-bash"># Install compile tmux dependencies
+sudo apt install -y autotools-dev automake libevent-dev ncurses-dev
+# Install tmux 2.8
+TMUX_VERSION='2.8'
+
+cd /tmp
+curl -L  https://github.com/tmux/tmux/releases/download/$TMUX_VERSION/tmux-$TMUX_VERSION.tar.gz -o tmux-$TMUX_VERSION.tar.gz
+tar zxvf tmux-$TMUX_VERSION.tar.gz
+cd tmux-$TMUX_VERSION
+./configure &amp;&amp; make
+sudo make install
+</code></pre>
+
+<p>这样，就安装好了，试着输入 <code>tmux -V</code> 看看版本吧。</p>
+
+<h2 id="玩耍时间">玩耍时间！</h2>
+
+<h3 id="创建-session">创建 session</h3>
+
+<p>首先，让我们先创建一个新的 <em>session</em> ，直接输入 <code>tmux</code> 即可快速的创建一个 <em>session</em> 。在出现的界面下方会出现一个状态栏，会有当前时间，hostname，当前窗口之类的信息（具体显示什么信息是可以配置的，tmux 很灵活，完全可以根据自己的喜好来设置）</p>
+
+<h3 id="创建-pane">创建 pane</h3>
+
+<p>然后我们可以试着切分出一个 <em>pane</em> ，按下 <kbd>prefix key</kbd>     （默认设置下，tmux 绑定 <kbd>Ctrl</kbd> + <kbd>b</kbd> 作为 <strong>prefix key</strong>），松开按键后，按下 <kbd>&ldquo;</kbd> 会在下方竖直切分出一个新的 <em>pane</em> 。现在我们就有两个 <em>pane</em> 啦。</p>
+
+<h3 id="切换-pane">切换 pane</h3>
+
+<p>现在的话我们的光标在刚刚新创建的 <em>pane</em> 里，想回到之前的 <em>pane</em> 里的话，就需要能在不同的 <em>pane</em> 之前切换的快捷键，按下 <kbd>prefix key</kbd> + <kbd>arrow key</kbd> 即可，在现在这个情况呢，就是按 <kbd>prefix key</kbd> + <kbd>方向上键</kbd>。</p>
+
+<h3 id="退出-pane">退出 pane</h3>
+
+<p>退出 <em>pane</em> 的方法很简单，相当于关闭一个 <em>tty</em> ，输入 <code>exit</code> 或者 <kbd>prefix key</kbd> + <kbd>x</kbd>，按 <kbd>y</kbd> 确认即可。</p>
+
+<h3 id="创建-window">创建 window</h3>
+
+<p>接下来我们创用 <kbd>prefix key</kbd> + <kbd>c</kbd> 建一个新的 <em>window</em> 。状态栏中也会显示新的 <em>window</em> 。</p>
+
+<p><img src="https://i.loli.net/2019/02/06/5c5ae7fe288dc.jpg" alt="tmux new window" /></p>
+
+<h3 id="切换-window">切换 window</h3>
+
+<p>按 <kbd>prefix key</kbd> + <kbd>n</kbd>/<kbd>p</kbd> 即可切换到
+左/右 边的 <em>window</em> 。如果 <em>window</em> 数量比较多呢，<del>那就多按几次（误）</del> 那就按 <kbd>prefix key</kbd> + <kbd>number key</kbd> 来快速切换，<em>window</em> 的下标会在状态栏中标出。</p>
+
+<h3 id="detach-session">detach session</h3>
+
+<p>逛了一圈之后想退出 <em>tmux</em> ？按 <kbd>prefix key</kbd> + <kbd>d</kbd> 即可 detach 当前 <em>session</em> 。<em>session</em> detach 会继续在后台执行，当你需要的时候重新 attach 上去，就可以继续工作啦。</p>
+
+<h2 id="tmux-cheatsheet">tmux cheatsheet</h2>
+
+<p>整理了 <em>tmux</em> 常用的一些快捷键，以便快速查阅：（为方便阅读，以下快捷键均忽略 <strong>prefix key</strong>）</p>
+
+<ul>
+<li>session
+
+<ul>
+<li><kbd>s</kbd> 列出所有的 <em>session</em> 并能用方向键选择进行切换。</li>
+<li><kbd>$</kbd> 重命名当前 <em>session</em></li>
+<li><kbd>$</kbd> detach 当前 <em>session</em></li>
+</ul></li>
+<li>window
+
+<ul>
+<li><kbd>c</kbd> 创建新的 <em>window</em></li>
+<li><kbd>n</kbd> 切换到右边的 <em>window</em> （next）</li>
+<li><kbd>p</kbd> 切换到左边的 <em>window</em> （previous）</li>
+<li><kbd>number key</kbd> 切换到指定的 <em>window</em></li>
+<li><kbd>&amp;</kbd> 关闭当前 <em>window</em></li>
+</ul></li>
+<li>pane
+
+<ul>
+<li><kbd>&ldquo;</kbd> 竖直切分出新的 <em>pane</em></li>
+<li><kbd>%</kbd> 水平切分出新的 <em>pane</em></li>
+<li><kbd>x</kbd> 关闭当前 <em>pane</em></li>
+<li><kbd>arrow key</kbd> 切换到周围的 <em>pane</em></li>
+<li><kbd>arrow key</kbd> 当前的 <em>pane</em> 进入全屏模式，再按一次时，退出全屏</li>
+<li><kbd>meta</kbd> + <kbd>arrow key</kbd> 更改当前 pane 大小 （meta key 也可以当做 option key）</li>
+</ul></li>
+<li><kbd>:</kbd> 调出 tmux 命令行（就像 vim 一样），可以输入 tmux 的命令，比如创建一个新的 <em>session</em></li>
+</ul>
+
+<p>常用的 <em>tmux</em> 命令。</p>
+
+<pre><code class="language-bash"># 列出所有的 session
+tmux ls
+# 创建新的 session 并指定名字
+tmux new -s &lt;session-name&gt;
+# attach 到指定的 session 上
+tmux attach -t &lt;session-name&gt;
+tmux a -t &lt;session-name&gt;
+# kill session
+tmux kill-session -t &lt;session-name&gt;
+# 列出当前 tmux 所有的快捷键
+tmux list-keys
+</code></pre>
+
+<h1 id="最后">最后</h1>
+
+<p><em>tmux</em> 在默认设置下其实挺够用的了，不过还不是特别的方便。</p>
+
+<p>比如不能像前面提到的 <em>Context</em> 一样可以根据名字快速切换 <em>session</em> ，这在 <em>session</em> 多的时候感受尤为明显。执行程序久了，要怎么知道现在执行的是什么程序呢？这些都需要对 <em>tmux</em> 进行额外的配置。</p>
+
+<p>所以下一篇会介绍如何配置 <em>tmux</em> ，以及我的解决方案，并附上 <em>tmux</em> 的一些坑点。</p>
+
+<h1 id="ref">Ref</h1>
+
+<ul>
+<li><a href="http://man.openbsd.org/OpenBSD-current/man1/tmux.1">http://man.openbsd.org/OpenBSD-current/man1/tmux.1</a></li>
+<li><a href="https://github.com/tmux/tmux">https://github.com/tmux/tmux</a></li>
+</ul>
+
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Bundy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">2019-02-06</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/tmux/">tmux</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/makefile-basic-tutorial/">
+            <span class="next-text nav-default">Makefile 基础教程</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'bundy-im';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/XSAM" class="iconfont icon-github" title="github"></a>
+  <a href="https://bundy.im/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2018 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Bundy</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" src="/dist/even.min.js?v=3.1.1"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118384635-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?f417c49f144c845ef0d3f1452e3f8103";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+
+</body>
+</html>
