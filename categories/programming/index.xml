@@ -6,10 +6,19 @@
     <description>Recent content in Programming on Casually Typing Like a Monkey</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 06 Feb 2019 15:13:09 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 23 Feb 2019 14:47:00 +0800</lastBuildDate>
     
 	<atom:link href="https://bundy.im/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>tmux 简易指南（二）</title>
+      <link>https://bundy.im/post/tmux-guide-2/</link>
+      <pubDate>Sat, 23 Feb 2019 14:47:00 +0800</pubDate>
+      
+      <guid>https://bundy.im/post/tmux-guide-2/</guid>
+      <description>上次简单介绍了 tmux 的一些基本概念和用法，能让我们很快的上手使用。但想用的顺手我认为还需要做些改进。 所以，本篇主要分享自己目前在用的 tmux 配置，并附</description>
+    </item>
     
     <item>
       <title>tmux 简易指南（一）</title>
@@ -31,8 +40,7 @@
 &lt;/blockquote&gt;
 
 &lt;p&gt;Hello, 这是个 &lt;code&gt;Makefile&lt;/code&gt; 的基础教程。
-你将在这学到为什么 &lt;code&gt;make&lt;/code&gt; 命令如此受欢迎。尽管它有着奇怪的语法，但实际上它的表达能力强而且高效，应对构建程序任务时它是个强有力的解决方案。
-&lt;/p&gt;</description>
+你将在这学到为什么 &lt;code&gt;make&lt;/code&gt; 命令如此受欢迎。尽管它有着奇怪的语法，但实际上它的表达能力强而且高效，应对构建程序任务时它是个强有力的解决方案。&lt;/p&gt;</description>
     </item>
     
   </channel>

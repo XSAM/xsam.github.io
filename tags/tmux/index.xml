@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tmux on Casually Typing Like a Monkey</title>
+    <title>tmux on Casually Typing Like a Monkey</title>
     <link>https://bundy.im/tags/tmux/</link>
-    <description>Recent content in Tmux on Casually Typing Like a Monkey</description>
+    <description>Recent content in tmux on Casually Typing Like a Monkey</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 06 Feb 2019 15:13:09 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 23 Feb 2019 14:47:00 +0800</lastBuildDate>
     
 	<atom:link href="https://bundy.im/tags/tmux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>tmux 简易指南（二）</title>
+      <link>https://bundy.im/post/tmux-guide-2/</link>
+      <pubDate>Sat, 23 Feb 2019 14:47:00 +0800</pubDate>
+      
+      <guid>https://bundy.im/post/tmux-guide-2/</guid>
+      <description>上次简单介绍了 tmux 的一些基本概念和用法，能让我们很快的上手使用。但想用的顺手我认为还需要做些改进。 所以，本篇主要分享自己目前在用的 tmux 配置，并附</description>
+    </item>
     
     <item>
       <title>tmux 简易指南（一）</title>
