@@ -2,39 +2,43 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Programming on Casually Typing Like a Monkey</title>
-    <link>https://bundy.im/categories/programming/</link>
+    <link>https://samxie.me/categories/programming/</link>
     <description>Recent content in Programming on Casually Typing Like a Monkey</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sat, 23 Feb 2019 14:47:00 +0800</lastBuildDate>
     
-	<atom:link href="https://bundy.im/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://samxie.me/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>tmux 简易指南（二）</title>
-      <link>https://bundy.im/post/tmux-guide-2/</link>
+      <link>https://samxie.me/post/tmux-guide-2/</link>
       <pubDate>Sat, 23 Feb 2019 14:47:00 +0800</pubDate>
       
-      <guid>https://bundy.im/post/tmux-guide-2/</guid>
-      <description>上次简单介绍了 tmux 的一些基本概念和用法，能让我们很快的上手使用。但想用的顺手我认为还需要做些改进。 所以，本篇主要分享自己目前在用的 tmux 配置，并附</description>
+      <guid>https://samxie.me/post/tmux-guide-2/</guid>
+      <description>&lt;p&gt;上次简单介绍了 &lt;em&gt;tmux&lt;/em&gt; 的一些基本概念和用法，能让我们很快的上手使用。但想用的顺手我认为还需要做些改进。&lt;/p&gt;
+
+&lt;p&gt;所以，本篇主要分享自己目前在用的 &lt;em&gt;tmux&lt;/em&gt; 配置，并附上详细说明原因，自己以后查阅也方便。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>tmux 简易指南（一）</title>
-      <link>https://bundy.im/post/tmux-guide-1/</link>
+      <link>https://samxie.me/post/tmux-guide-1/</link>
       <pubDate>Wed, 06 Feb 2019 15:13:09 +0800</pubDate>
       
-      <guid>https://bundy.im/post/tmux-guide-1/</guid>
-      <description>用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。会话的快速</description>
+      <guid>https://samxie.me/post/tmux-guide-1/</guid>
+      <description>&lt;p&gt;用了 &lt;em&gt;tmux&lt;/em&gt; 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。&lt;/p&gt;
+
+&lt;p&gt;会话的快速切换也能在需要管理多个项目时让整个流程变得非常的顺畅。在快速切换这方面 tmux 就像是终端中的窗口管理软件，对应到图形界面好比 macOS 下的窗口切换软件 &lt;a href=&#34;https://contexts.co/&#34;&gt;Context&lt;/a&gt;。（稍微改造一番后，甚至连操作都很像）&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Makefile 基础教程</title>
-      <link>https://bundy.im/post/makefile-basic-tutorial/</link>
+      <link>https://samxie.me/post/makefile-basic-tutorial/</link>
       <pubDate>Fri, 27 Apr 2018 13:35:25 +0800</pubDate>
       
-      <guid>https://bundy.im/post/makefile-basic-tutorial/</guid>
+      <guid>https://samxie.me/post/makefile-basic-tutorial/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本文内容来自对 &lt;a href=&#34;https://gist.github.com/isaacs/62a2d1825d04437c6f08&#34;&gt;isaacs/Makefile&lt;/a&gt; 的翻译、修改和补充。&lt;/p&gt;
 &lt;/blockquote&gt;

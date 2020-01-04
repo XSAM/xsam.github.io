@@ -16,21 +16,19 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Bundy" />
-  <meta name="description" content="用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。会话的快速" />
-<meta name="keywords" content="tmux, guide" />
-
+<meta name="author" content="Sam" /><meta name="description" content="用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。
+会话的快速切换也能在需要管理多个项目时让整个流程变得非常的顺畅。在快速切换这方面 tmux 就像是终端中的窗口管理软件，对应到图形界面好比 macOS 下的窗口切换软件 Context。（稍微改造一番后，甚至连操作都很像）
+" /><meta name="keywords" content="tmux, guide" />
 
 
 
 <meta name="google-site-verification" content="RTeCAJIzJaqxW5dpgcGtWC7NIanMnuOPE7fEgZjVYco" />
 
 
-<meta name="generator" content="Hugo 0.54.0" />
+<meta name="generator" content="Hugo 0.54.0 with theme even" />
 
 
-<link rel="canonical" href="https://bundy.im/post/tmux-guide-1/" />
-
+<link rel="canonical" href="https://samxie.me/post/tmux-guide-1/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -38,38 +36,37 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-
-
-
-
-
-<link href="/dist/even.min.css?v=3.1.1" rel="stylesheet">
+<link href="/dist/even.82346afd.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-
-
 <meta property="og:title" content="tmux 简易指南（一）" />
-<meta property="og:description" content="用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。会话的快速" />
+<meta property="og:description" content="用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。
+
+会话的快速切换也能在需要管理多个项目时让整个流程变得非常的顺畅。在快速切换这方面 tmux 就像是终端中的窗口管理软件，对应到图形界面好比 macOS 下的窗口切换软件 Context。（稍微改造一番后，甚至连操作都很像）" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://bundy.im/post/tmux-guide-1/" />
+<meta property="og:url" content="https://samxie.me/post/tmux-guide-1/" />
 <meta property="article:published_time" content="2019-02-06T15:13:09&#43;08:00"/>
 <meta property="article:modified_time" content="2019-02-06T15:13:09&#43;08:00"/>
 
 <meta itemprop="name" content="tmux 简易指南（一）">
-<meta itemprop="description" content="用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。会话的快速">
+<meta itemprop="description" content="用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。
+
+会话的快速切换也能在需要管理多个项目时让整个流程变得非常的顺畅。在快速切换这方面 tmux 就像是终端中的窗口管理软件，对应到图形界面好比 macOS 下的窗口切换软件 Context。（稍微改造一番后，甚至连操作都很像）">
 
 
 <meta itemprop="datePublished" content="2019-02-06T15:13:09&#43;08:00" />
 <meta itemprop="dateModified" content="2019-02-06T15:13:09&#43;08:00" />
-<meta itemprop="wordCount" content="1669">
+<meta itemprop="wordCount" content="1691">
 
 
 
 <meta itemprop="keywords" content="tmux," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="tmux 简易指南（一）"/>
-<meta name="twitter:description" content="用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。会话的快速"/>
+<meta name="twitter:description" content="用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。
+
+会话的快速切换也能在需要管理多个项目时让整个流程变得非常的顺畅。在快速切换这方面 tmux 就像是终端中的窗口管理软件，对应到图形界面好比 macOS 下的窗口切换软件 Context。（稍微改造一番后，甚至连操作都很像）"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -141,20 +138,14 @@
       <div class="post-meta">
         <span class="post-time"> 2019-02-06 </span>
         <div class="post-category">
-            
-              <a href="/categories/programming/"> Programming </a>
-            
-          </div>
-        
+            <a href="/categories/programming/"> Programming </a>
+            </div>
         
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
-  
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
 <ul>
@@ -181,15 +172,10 @@
 </nav>
   </div>
 </div>
-
-    
-    
-
-    
     <div class="post-content">
-      
+      <p>用了 <em>tmux</em> 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。</p>
 
-<p>用了 <em>tmux</em> 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。会话的快速切换也能在需要管理多个项目时让整个流程变得非常的顺畅。在快速切换这方面 tmux 就像是终端中的窗口管理软件，对应到图形界面好比 macOS 下的窗口切换软件 <a href="https://contexts.co/">Context</a>。（稍微改造一番后，甚至连操作都很像）</p>
+<p>会话的快速切换也能在需要管理多个项目时让整个流程变得非常的顺畅。在快速切换这方面 tmux 就像是终端中的窗口管理软件，对应到图形界面好比 macOS 下的窗口切换软件 <a href="https://contexts.co/">Context</a>。（稍微改造一番后，甚至连操作都很像）</p>
 
 <h1 id="那么-什么是-tmux-呢">那么，什么是 tmux 呢？</h1>
 
@@ -232,20 +218,34 @@
 <h2 id="安装">安装</h2>
 
 <p>我会用一些比较新的功能，用的版本是 <code>tmux 2.8</code>（其实 2.6 以上即可），所以虽然 <em>tmux</em> 可以从包管理工具里面直接安装，但我一般选择自己编译。</p>
-
-<pre><code class="language-bash"># Install compile tmux dependencies
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Install compile tmux dependencies</span>
 sudo apt install -y autotools-dev automake libevent-dev ncurses-dev
-# Install tmux 2.8
-TMUX_VERSION='2.8'
+<span class="c1"># Install tmux 2.8</span>
+<span class="nv">TMUX_VERSION</span><span class="o">=</span><span class="s1">&#39;2.8&#39;</span>
 
-cd /tmp
-curl -L  https://github.com/tmux/tmux/releases/download/$TMUX_VERSION/tmux-$TMUX_VERSION.tar.gz -o tmux-$TMUX_VERSION.tar.gz
-tar zxvf tmux-$TMUX_VERSION.tar.gz
-cd tmux-$TMUX_VERSION
-./configure &amp;&amp; make
-sudo make install
-</code></pre>
-
+<span class="nb">cd</span> /tmp
+curl -L  https://github.com/tmux/tmux/releases/download/<span class="nv">$TMUX_VERSION</span>/tmux-<span class="nv">$TMUX_VERSION</span>.tar.gz -o tmux-<span class="nv">$TMUX_VERSION</span>.tar.gz
+tar zxvf tmux-<span class="nv">$TMUX_VERSION</span>.tar.gz
+<span class="nb">cd</span> tmux-<span class="nv">$TMUX_VERSION</span>
+./configure <span class="o">&amp;&amp;</span> make
+sudo make install</code></pre></td></tr></table>
+</div>
+</div>
 <p>这样，就安装好了，试着输入 <code>tmux -V</code> 看看版本吧。</p>
 
 <h2 id="玩耍时间">玩耍时间！</h2>
@@ -316,20 +316,34 @@ sudo make install
 </ul>
 
 <p>常用的 <em>tmux</em> 命令。</p>
-
-<pre><code class="language-bash"># 列出所有的 session
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 列出所有的 session</span>
 tmux ls
-# 创建新的 session 并指定名字
+<span class="c1"># 创建新的 session 并指定名字</span>
 tmux new -s &lt;session-name&gt;
-# attach 到指定的 session 上
+<span class="c1"># attach 到指定的 session 上</span>
 tmux attach -t &lt;session-name&gt;
 tmux a -t &lt;session-name&gt;
-# kill session
+<span class="c1"># kill session</span>
 tmux kill-session -t &lt;session-name&gt;
-# 列出当前 tmux 所有的快捷键
-tmux list-keys
-</code></pre>
-
+<span class="c1"># 列出当前 tmux 所有的快捷键</span>
+tmux list-keys</code></pre></td></tr></table>
+</div>
+</div>
 <h1 id="最后">最后</h1>
 
 <p><em>tmux</em> 在默认设置下其实挺够用的了，不过还不是特别的方便。</p>
@@ -344,18 +358,19 @@ tmux list-keys
 <li><a href="http://man.openbsd.org/OpenBSD-current/man1/tmux.1">http://man.openbsd.org/OpenBSD-current/man1/tmux.1</a></li>
 <li><a href="https://github.com/tmux/tmux">https://github.com/tmux/tmux</a></li>
 </ul>
-
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content">Bundy</span>
+    <span class="item-content">Sam</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
-    <span class="item-content">2019-02-06</span>
+    <span class="item-content">
+        2019-02-06
+        
+    </span>
   </p>
   
   <p class="copyright-item">
@@ -363,27 +378,17 @@ tmux list-keys
     <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
   </p>
 </div>
-
-    
-    
-
-    <footer class="post-footer">
+<footer class="post-footer">
       <div class="post-tags">
-          
           <a href="/tags/tmux/">tmux</a>
-          
-        </div>
-
-      
+          </div>
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/tmux-guide-2/">
+        <a class="prev" href="/post/tmux-guide-2/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">tmux 简易指南（二）</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        
-          <a class="next" href="/post/makefile-basic-tutorial/">
+        <a class="next" href="/post/makefile-basic-tutorial/">
             <span class="next-text nav-default">Makefile 基础教程</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
@@ -392,8 +397,7 @@ tmux list-keys
     </footer>
   </article>
         </div>
-        
-  <div id="disqus_thread"></div>
+        <div id="disqus_thread"></div>
     <script type="text/javascript">
     (function() {
       
@@ -401,12 +405,14 @@ tmux list-keys
       if (window.location.hostname === 'localhost') return;
 
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      var disqus_shortname = 'bundy-im';
+      var disqus_shortname = 'samxie';
       dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
 
   
 
@@ -416,7 +422,7 @@ tmux list-keys
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="https://github.com/XSAM" class="iconfont icon-github" title="github"></a>
-  <a href="https://bundy.im/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="https://samxie.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -433,13 +439,12 @@ tmux list-keys
 
   <span class="copyright-year">
     &copy; 
-    
-      2018 - 
-    2019
+    2018 - 
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
-    <span class="author">Bundy</span>
+    <span class="author">Sam</span>
   </span>
 </div>
     </footer>
@@ -449,13 +454,10 @@ tmux list-keys
     </div>
   </div>
   
-<script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-
-
-<script type="text/javascript" src="/dist/even.min.js?v=3.1.1"></script>
+<script type="text/javascript" src="/dist/even.b665207e.min.js"></script>
 
 
 <script type="application/javascript">
@@ -463,7 +465,7 @@ var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 	ga('create', 'UA-118384635-1', 'auto');
-	
+	ga('set', 'anonymizeIp', true);
 	ga('send', 'pageview');
 }
 </script>

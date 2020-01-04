@@ -16,23 +16,19 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Bundy" />
-  <meta name="description" content=" Copy from 《Hugo 主题 Nuo 文章样式预览》
+<meta name="author" content="Sam" /><meta name="description" content=" Copy from 《Hugo 主题 Nuo 文章样式预览》
  这篇文章集中说明主题所支持的 Markdown 语法和 Hugo Shortcodes 插件，你也可以在这里预览到他们的样子。如果你不喜欢某些样式，可以去修改 css/ 文件夹下的 .scss 文件。
-" />
-
-  <meta name="keywords" content="Hugo, programming, blog" />
+" /><meta name="keywords" content="Hugo, programming, blog" />
 
 
 
 <meta name="google-site-verification" content="RTeCAJIzJaqxW5dpgcGtWC7NIanMnuOPE7fEgZjVYco" />
 
 
-<meta name="generator" content="Hugo 0.54.0" />
+<meta name="generator" content="Hugo 0.54.0 with theme even" />
 
 
-<link rel="canonical" href="https://bundy.im/post/theme-preview/" />
-
+<link rel="canonical" href="https://samxie.me/post/theme-preview/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,15 +36,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-
-
-
-
-
-<link href="/dist/even.min.css?v=3.1.1" rel="stylesheet">
+<link href="/dist/even.82346afd.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-
-
 
 
 <meta property="og:title" content="Theme Preview" />
@@ -58,7 +47,7 @@ Copy from 《Hugo 主题 Nuo 文章样式预览》
 
 这篇文章集中说明主题所支持的 Markdown 语法和 Hugo Shortcodes 插件，你也可以在这里预览到他们的样子。如果你不喜欢某些样式，可以去修改 css/ 文件夹下的 .scss 文件。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://bundy.im/post/theme-preview/" />
+<meta property="og:url" content="https://samxie.me/post/theme-preview/" />
 <meta property="article:published_time" content="2018-01-20T17:03:25&#43;08:00"/>
 <meta property="article:modified_time" content="2018-01-20T17:03:25&#43;08:00"/>
 
@@ -72,7 +61,7 @@ Copy from 《Hugo 主题 Nuo 文章样式预览》
 
 <meta itemprop="datePublished" content="2018-01-20T17:03:25&#43;08:00" />
 <meta itemprop="dateModified" content="2018-01-20T17:03:25&#43;08:00" />
-<meta itemprop="wordCount" content="807">
+<meta itemprop="wordCount" content="815">
 
 
 
@@ -156,15 +145,11 @@ Copy from 《Hugo 主题 Nuo 文章样式预览》
         <span class="post-time"> 2018-01-20 </span>
         
         
-        
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
-  
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
 <ul>
@@ -205,11 +190,6 @@ Copy from 《Hugo 主题 Nuo 文章样式预览》
 </nav>
   </div>
 </div>
-
-    
-    
-
-    
     <div class="post-content">
       <blockquote>
 <p>Copy from <a href="https://laozhu.me/post/hugo-nuo-post-preview/">《Hugo 主题 Nuo 文章样式预览》</a></p>
@@ -337,17 +317,29 @@ Copy from 《Hugo 主题 Nuo 文章样式预览》
 <h2 id="5-代码">5. 代码</h2>
 
 <p>以本站的一段 <code>JavaScript</code> 代码做演示。</p>
-
-<pre><code class="language-javascript">// Initialize video.js player
-if (document.getElementById('my-player') !== null) {
-  /* eslint-disable no-undef */
-  videojs('#my-player', {
-    aspectRatio: '16:9',
-    fluid: true,
-  });
-}
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// Initialize video.js player
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;my-player&#39;</span><span class="p">)</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/* eslint-disable no-undef */</span>
+  <span class="nx">videojs</span><span class="p">(</span><span class="s1">&#39;#my-player&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">aspectRatio</span><span class="o">:</span> <span class="s1">&#39;16:9&#39;</span><span class="p">,</span>
+    <span class="nx">fluid</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="6-分割线">6. 分割线</h2>
 
 <hr />
@@ -431,19 +423,21 @@ if (document.getElementById('my-player') !== null) {
 
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="//www.youtube.com/embed/wC5pJm8RAu4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+  <iframe src="//www.youtube-nocookie.com/embed/wC5pJm8RAu4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">Author</span>
-    <span class="item-content">Bundy</span>
+    <span class="item-content">Sam</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
-    <span class="item-content">2018-01-20</span>
+    <span class="item-content">
+        2018-01-20
+        
+    </span>
   </p>
   
   <p class="copyright-item">
@@ -451,21 +445,12 @@ if (document.getElementById('my-player') !== null) {
     <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
   </p>
 </div>
-
-    
-    
-
-    <footer class="post-footer">
+<footer class="post-footer">
       <div class="post-tags">
-          
           <a href="/tags/started/">Started</a>
-          
-        </div>
-
-      
+          </div>
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/makefile-basic-tutorial/">
+        <a class="prev" href="/post/makefile-basic-tutorial/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">Makefile 基础教程</span>
             <span class="prev-text nav-mobile">Prev</span>
@@ -475,8 +460,7 @@ if (document.getElementById('my-player') !== null) {
     </footer>
   </article>
         </div>
-        
-  <div id="disqus_thread"></div>
+        <div id="disqus_thread"></div>
     <script type="text/javascript">
     (function() {
       
@@ -484,12 +468,14 @@ if (document.getElementById('my-player') !== null) {
       if (window.location.hostname === 'localhost') return;
 
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      var disqus_shortname = 'bundy-im';
+      var disqus_shortname = 'samxie';
       dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
 
   
 
@@ -499,7 +485,7 @@ if (document.getElementById('my-player') !== null) {
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="https://github.com/XSAM" class="iconfont icon-github" title="github"></a>
-  <a href="https://bundy.im/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="https://samxie.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
@@ -516,13 +502,12 @@ if (document.getElementById('my-player') !== null) {
 
   <span class="copyright-year">
     &copy; 
-    
-      2018 - 
-    2019
+    2018 - 
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
-    <span class="author">Bundy</span>
+    <span class="author">Sam</span>
   </span>
 </div>
     </footer>
@@ -532,20 +517,17 @@ if (document.getElementById('my-player') !== null) {
     </div>
   </div>
   
-<script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-
-
-<script type="text/javascript" src="/dist/even.min.js?v=3.1.1"></script>
+<script type="text/javascript" src="/dist/even.b665207e.min.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       showProcessingMessages: false,
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 <script type="application/javascript">
@@ -553,7 +535,7 @@ var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 	ga('create', 'UA-118384635-1', 'auto');
-	
+	ga('set', 'anonymizeIp', true);
 	ga('send', 'pageview');
 }
 </script>

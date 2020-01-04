@@ -1,98 +1,126 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<?xml-stylesheet type="text/xsl" href="https://bundy.im/sitemap.xsl"?>
+<?xml-stylesheet type="text/xsl" href="https://samxie.me/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://bundy.im/post/tmux-guide-2/</loc>
+    <loc>https://samxie.me/post/yubikey-with-ssh/</loc>
+    <lastmod>2020-01-03T23:31:26+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://samxie.me/post/tmux-guide-2/</loc>
     <lastmod>2019-02-23T14:47:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://bundy.im/post/tmux-guide-1/</loc>
+    <loc>https://samxie.me/post/tmux-guide-1/</loc>
     <lastmod>2019-02-06T15:13:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://bundy.im/post/makefile-basic-tutorial/</loc>
+    <loc>https://samxie.me/post/makefile-basic-tutorial/</loc>
     <lastmod>2018-04-27T13:35:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://bundy.im/post/theme-preview/</loc>
+    <loc>https://samxie.me/post/theme-preview/</loc>
     <lastmod>2018-01-20T17:03:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://bundy.im/</loc>
-    <lastmod>2019-02-23T14:47:00+08:00</lastmod>
+    <loc>https://samxie.me/</loc>
+    <lastmod>2020-01-03T23:31:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://bundy.im/categories/</loc>
+    <loc>https://samxie.me/categories/</loc>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://bundy.im/links/</loc>
+    <loc>https://samxie.me/tags/gpg/</loc>
+    <lastmod>2020-01-03T23:31:26+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://samxie.me/links/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://bundy.im/tags/makefile/</loc>
+    <loc>https://samxie.me/tags/makefile/</loc>
     <lastmod>2018-04-27T13:35:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://bundy.im/post/</loc>
+    <loc>https://samxie.me/post/</loc>
+    <lastmod>2020-01-03T23:31:26+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://samxie.me/categories/programming/</loc>
     <lastmod>2019-02-23T14:47:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://bundy.im/categories/programming/</loc>
-    <lastmod>2019-02-23T14:47:00+08:00</lastmod>
+    <loc>https://samxie.me/tags/ssh/</loc>
+    <lastmod>2020-01-03T23:31:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://bundy.im/tags/started/</loc>
+    <loc>https://samxie.me/tags/started/</loc>
     <lastmod>2018-01-20T17:03:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://bundy.im/tags/</loc>
-    <lastmod>2018-04-27T13:35:25+08:00</lastmod>
+    <loc>https://samxie.me/tags/</loc>
+    <lastmod>2020-01-03T23:31:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://bundy.im/tags/tmux/</loc>
+    <loc>https://samxie.me/tags/yubikey/</loc>
+    <lastmod>2020-01-03T23:31:26+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://samxie.me/tags/tmux/</loc>
     <lastmod>2019-02-23T14:47:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://bundy.im/about/</loc>
+    <loc>https://samxie.me/about/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

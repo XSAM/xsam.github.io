@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Yubikey with SSH - Casually Typing Like a Monkey</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Sam" /><meta name="description" content="最近入手了一个 Yubikey，其中用来做 SSH 登录。一路操作下来，踩不少坑，等到终于使用 Yubikey 中的 Authentication key 登录上机器后发现：
+我好像没法拿着这个 Yubikey 随便找台机器登录呀（并不包括 Windows）。
+Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到处登录笔记软件吧。
+所以为了满足能随便找台机器都能登录这一需求（伪），特此写（水）一篇文章，介绍一下如何使用 Yubikey SSH 登录机器。
+" /><meta name="keywords" content="yubikey, gpg, ssh" />
+
+
+
+<meta name="google-site-verification" content="RTeCAJIzJaqxW5dpgcGtWC7NIanMnuOPE7fEgZjVYco" />
+
+
+<meta name="generator" content="Hugo 0.54.0 with theme even" />
+
+
+<link rel="canonical" href="https://samxie.me/post/yubikey-with-ssh/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.82346afd.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Yubikey with SSH" />
+<meta property="og:description" content="最近入手了一个 Yubikey，其中用来做 SSH 登录。一路操作下来，踩不少坑，等到终于使用 Yubikey 中的 Authentication key 登录上机器后发现：
+
+我好像没法拿着这个 Yubikey 随便找台机器登录呀（并不包括 Windows）。
+
+Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到处登录笔记软件吧。
+
+所以为了满足能随便找台机器都能登录这一需求（伪），特此写（水）一篇文章，介绍一下如何使用 Yubikey SSH 登录机器。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://samxie.me/post/yubikey-with-ssh/" />
+<meta property="article:published_time" content="2020-01-03T23:31:26&#43;08:00"/>
+<meta property="article:modified_time" content="2020-01-03T23:31:26&#43;08:00"/>
+
+<meta itemprop="name" content="Yubikey with SSH">
+<meta itemprop="description" content="最近入手了一个 Yubikey，其中用来做 SSH 登录。一路操作下来，踩不少坑，等到终于使用 Yubikey 中的 Authentication key 登录上机器后发现：
+
+我好像没法拿着这个 Yubikey 随便找台机器登录呀（并不包括 Windows）。
+
+Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到处登录笔记软件吧。
+
+所以为了满足能随便找台机器都能登录这一需求（伪），特此写（水）一篇文章，介绍一下如何使用 Yubikey SSH 登录机器。">
+
+
+<meta itemprop="datePublished" content="2020-01-03T23:31:26&#43;08:00" />
+<meta itemprop="dateModified" content="2020-01-03T23:31:26&#43;08:00" />
+<meta itemprop="wordCount" content="981">
+
+
+
+<meta itemprop="keywords" content="Yubikey,GPG,SSH," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Yubikey with SSH"/>
+<meta name="twitter:description" content="最近入手了一个 Yubikey，其中用来做 SSH 登录。一路操作下来，踩不少坑，等到终于使用 Yubikey 中的 Authentication key 登录上机器后发现：
+
+我好像没法拿着这个 Yubikey 随便找台机器登录呀（并不包括 Windows）。
+
+Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到处登录笔记软件吧。
+
+所以为了满足能随便找台机器都能登录这一需求（伪），特此写（水）一篇文章，介绍一下如何使用 Yubikey SSH 登录机器。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Casually Typing Like a Monkey</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Casually Typing Like a Monkey</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Yubikey with SSH</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-01-03 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#准备工作">准备工作</a></li>
+<li><a href="#布置马戏团">布置马戏团</a></li>
+<li><a href="#拿到表演钥匙">拿到表演钥匙</a></li>
+<li><a href="#杂耍">杂耍！</a>
+<ul>
+<li><a href="#抛-12-个球">抛 12 个球！</a></li>
+</ul></li>
+<li><a href="#还有一件事">还有一件事</a>
+<ul>
+<li><a href="#gpg-snippets">GPG snippets</a></li>
+</ul></li>
+<li><a href="#参考">参考</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>最近入手了一个 <a href="https://zh.wikipedia.org/wiki/YubiKey">Yubikey</a>，其中用来做 SSH 登录。一路操作下来，踩不少坑，等到终于使用 Yubikey 中的 Authentication key 登录上机器后发现：</p>
+
+<p><strong>我好像没法拿着这个 Yubikey 随便找台机器登录呀</strong>（并不包括 Windows）。</p>
+
+<p>Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到处登录笔记软件吧。</p>
+
+<p>所以为了满足能随便找台机器都能登录这一需求（伪），特此写（水）一篇文章，介绍一下如何使用 Yubikey SSH 登录机器。</p>
+
+<h1 id="准备工作">准备工作</h1>
+
+<ul>
+<li>配置好 <code>OpenPGP</code> 功能的 Yubikey</li>
+</ul>
+
+<p>没有配置好的同学可以参照这篇文章：<a href="https://blog.dwx.io/yubikey4/">YubiKey4 我踩过的那些坑</a> 写得相当详细了。（广告费后台结一下）</p>
+
+<ul>
+<li>随便找到的使用 <code>*nix</code> 操作系统的机器</li>
+<li>安装好 <code>GnuPG</code> 套件</li>
+</ul>
+
+<h1 id="布置马戏团">布置马戏团</h1>
+
+<p>把这段脚本放到 <strong>shell</strong> profile 中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># GPG ssh support</span>
+<span class="nb">export</span> <span class="nv">GPG_TTY</span><span class="o">=</span><span class="k">$(</span>tty<span class="k">)</span>
+gpg-connect-agent updatestartuptty /bye
+<span class="nb">unset</span> SSH_AGENT_PID
+<span class="nb">export</span> <span class="nv">SSH_AUTH_SOCK</span><span class="o">=</span><span class="k">$(</span>gpgconf --list-dirs agent-ssh-socket<span class="k">)</span>
+
+<span class="k">function</span> gpg_ssh_clear<span class="o">()</span> <span class="o">{</span>
+    <span class="nv">keys</span><span class="o">=</span><span class="k">$(</span>gpg-connect-agent <span class="s1">&#39;keyinfo --ssh-list --ssh-fpr&#39;</span> /bye <span class="p">|</span> grep MD5 <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span> <span class="p">|</span> head<span class="k">)</span>
+    <span class="k">for</span> key in <span class="nv">$keys</span><span class="p">;</span> <span class="k">do</span> gpg-connect-agent <span class="s2">&#34;delete_key </span><span class="nv">$key</span><span class="s2"> --force&#34;</span> /bye<span class="p">;</span> <span class="k">done</span>
+<span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>gpg-agent</strong> 有模拟 OpenSSH agent 的功能，所以可以用 <strong>gpg-agent</strong> 替代 <strong>ssh-agent</strong>，设置 <code>SSH_AUTH_SOCK</code> 和 <code>SSH_AGENT_PID</code> 以达成目的。</p>
+
+<p>使用 <strong>gpg-agent</strong> cache SSH key 后，<code>ssh-add -D</code> 将不再起作用，如果需要删除 <strong>gpg-agent</strong> cache 的 key，得使用 <code>gpg-connect-agent</code>。所以我写了个函数，拿出所有的 <strong>gpg-agent</strong> cache 的 SSH key，并删除。想清理时，执行 <code>gpg_ssh_clear</code> 即可。（并不会清除 Yubikey 里面的 key）</p>
+
+<p>添加内容到 <code>~/.gnupg/gpg-agent.conf</code> 文件中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">pinentry-program /usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac
+enable-ssh-support
+write-env-file
+use-standard-socket
+default-cache-ttl <span class="m">600</span>
+max-cache-ttl <span class="m">7200</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>pinentry-program</code> 这边给出的是 <em>macOS</em> 的示例，其他的 OS 可以参考这个<a href="https://unix.stackexchange.com/questions/236746/change-pinentry-program-temporarily-with-gpg-agent">回答</a>。</p>
+
+<h1 id="拿到表演钥匙">拿到表演钥匙</h1>
+
+<p>输入 <code>gpgconf --reload gpg-agent</code> 重载配置，插上 Yubikey，GnuPG 会自动检测到并把 key 加入到 agent 里面。</p>
+
+<p>接着 <code>ssh-add -L</code> 就能看到一个备注为 <code>cardno:card-id</code> 或 <code>openpgp:key-id</code> 的 SSH pubilc key 了。</p>
+
+<h1 id="杂耍">杂耍！</h1>
+
+<p>找台机器（或者可以 ssh 自己），公钥一丢，直接 <code>ssh</code> 走起，输入 <em>Yubikey</em> PIN 后，直接就登录上去了。</p>
+
+<p>完全不需要把 private key 复制到机器上冒着泄漏的风险，想在哪登，就在哪登。（所以我为啥不出门自带机器。。。（这不重要！））</p>
+
+<h2 id="抛-12-个球">抛 12 个球！</h2>
+
+<p>如果希望让整个 SSH 授权过程更为庄重（增加节目效果），你可以在授权前要求触碰 Yubikey 才能完成授权。</p>
+
+<p>通过安装官方的 <a href="https://github.com/Yubico/yubikey-manager">ykman</a> 设置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">ykman openpgp set-touch aut on</code></pre></td></tr></table>
+</div>
+</div>
+<p>这样每次 <code>ssh</code> 用到 Yubikey 的 key 授权时，Yubikey 的指示灯都会一闪一闪表示需要触碰才能完成操作。</p>
+
+<blockquote>
+<p>When the yubikey is pressed, then you have my permission to die (authenticate) &ndash; Bane (</p>
+</blockquote>
+
+<h1 id="还有一件事">还有一件事</h1>
+
+<p>目前这个方案用户体验上有个不舒服的地方，每次 <code>ssh-add</code> 添加普通的 SSH key 的时候，GPG 都会跳出来要求一个密码用来保护加入的 SSH secret key。好在添加 SSH key 不算是高频操作，所以也还能接受。</p>
+
+<h2 id="gpg-snippets">GPG snippets</h2>
+
+<p>放上一些 GPG snippet，方便查阅。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Reload</span>
+gpgconf --reload gpg-agent
+
+<span class="c1"># Kill</span>
+gpgconf --kill gpg-agent
+
+<span class="c1"># List options</span>
+gpgconf --list-options gpg-agent
+
+<span class="c1"># This is an undocumented command to export ssh public key</span>
+pgp --export-ssh-key &lt;Key ID&gt;
+
+<span class="c1"># Quickly start gpg-agent</span>
+gpg-connect-agent /bye</code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="参考">参考</h1>
+
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/GnuPG#SSH_agent">https://wiki.archlinux.org/index.php/GnuPG#SSH_agent</a></li>
+<li><a href="https://blog.dwx.io/yubikey4">https://blog.dwx.io/yubikey4</a></li>
+<li><a href="https://florin.myip.org/blog/easy-multifactor-authentication-ssh-using-yubikey-neo-tokens">https://florin.myip.org/blog/easy-multifactor-authentication-ssh-using-yubikey-neo-tokens</a></li>
+<li><a href="https://github.com/Yubico/yubikey-manager">https://github.com/Yubico/yubikey-manager</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Sam</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-01-03
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/yubikey/">Yubikey</a>
+          <a href="/tags/gpg/">GPG</a>
+          <a href="/tags/ssh/">SSH</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/tmux-guide-2/">
+            <span class="next-text nav-default">tmux 简易指南（二）</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'samxie';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/XSAM" class="iconfont icon-github" title="github"></a>
+  <a href="https://samxie.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Sam</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.b665207e.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-118384635-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script id="baidu_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+    hm.src = "https://hm.baidu.com/hm.js?f417c49f144c845ef0d3f1452e3f8103";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+
+</body>
+</html>

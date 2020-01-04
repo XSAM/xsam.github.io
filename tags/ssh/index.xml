@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SSH on Casually Typing Like a Monkey</title>
+    <link>https://samxie.me/tags/ssh/</link>
+    <description>Recent content in SSH on Casually Typing Like a Monkey</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 03 Jan 2020 23:31:26 +0800</lastBuildDate>
+    
+	<atom:link href="https://samxie.me/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Yubikey with SSH</title>
+      <link>https://samxie.me/post/yubikey-with-ssh/</link>
+      <pubDate>Fri, 03 Jan 2020 23:31:26 +0800</pubDate>
+      
+      <guid>https://samxie.me/post/yubikey-with-ssh/</guid>
+      <description>&lt;p&gt;最近入手了一个 &lt;a href=&#34;https://zh.wikipedia.org/wiki/YubiKey&#34;&gt;Yubikey&lt;/a&gt;，其中用来做 SSH 登录。一路操作下来，踩不少坑，等到终于使用 Yubikey 中的 Authentication key 登录上机器后发现：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;我好像没法拿着这个 Yubikey 随便找台机器登录呀&lt;/strong&gt;（并不包括 Windows）。&lt;/p&gt;
+
+&lt;p&gt;Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到处登录笔记软件吧。&lt;/p&gt;
+
+&lt;p&gt;所以为了满足能随便找台机器都能登录这一需求（伪），特此写（水）一篇文章，介绍一下如何使用 Yubikey SSH 登录机器。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
