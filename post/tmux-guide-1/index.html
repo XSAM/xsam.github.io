@@ -47,7 +47,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://samxie.me/post/tmux-guide-1/" />
 <meta property="article:published_time" content="2019-02-06T15:13:09&#43;08:00"/>
-<meta property="article:modified_time" content="2019-02-06T15:13:09&#43;08:00"/>
+<meta property="article:modified_time" content="2020-02-10T15:46:45&#43;08:00"/>
 
 <meta itemprop="name" content="tmux 简易指南（一）">
 <meta itemprop="description" content="用了 tmux 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。
@@ -56,8 +56,8 @@
 
 
 <meta itemprop="datePublished" content="2019-02-06T15:13:09&#43;08:00" />
-<meta itemprop="dateModified" content="2019-02-06T15:13:09&#43;08:00" />
-<meta itemprop="wordCount" content="1691">
+<meta itemprop="dateModified" content="2020-02-10T15:46:45&#43;08:00" />
+<meta itemprop="wordCount" content="1690">
 
 
 
@@ -291,7 +291,7 @@ sudo make install</code></pre></td></tr></table>
 <ul>
 <li><kbd>s</kbd> 列出所有的 <em>session</em> 并能用方向键选择进行切换。</li>
 <li><kbd>$</kbd> 重命名当前 <em>session</em></li>
-<li><kbd>$</kbd> detach 当前 <em>session</em></li>
+<li><kbd>d</kbd> detach 当前 <em>session</em></li>
 </ul></li>
 <li>window
 
@@ -309,7 +309,7 @@ sudo make install</code></pre></td></tr></table>
 <li><kbd>%</kbd> 水平切分出新的 <em>pane</em></li>
 <li><kbd>x</kbd> 关闭当前 <em>pane</em></li>
 <li><kbd>arrow key</kbd> 切换到周围的 <em>pane</em></li>
-<li><kbd>arrow key</kbd> 当前的 <em>pane</em> 进入全屏模式，再按一次时，退出全屏</li>
+<li><kbd>z</kbd> 当前的 <em>pane</em> 进入全屏模式，再按一次时，退出全屏</li>
 <li><kbd>meta</kbd> + <kbd>arrow key</kbd> 更改当前 pane 大小 （meta key 也可以当做 option key）</li>
 </ul></li>
 <li><kbd>:</kbd> 调出 tmux 命令行（就像 vim 一样），可以输入 tmux 的命令，比如创建一个新的 <em>session</em></li>
@@ -368,7 +368,7 @@ tmux list-keys</code></pre></td></tr></table>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2019-02-06
+        2020-02-10
         
     </span>
   </p>
