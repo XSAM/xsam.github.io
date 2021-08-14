@@ -146,15 +146,21 @@ Hello, 这是个 Makefile 的基础教程。
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#自动变量automatic-variables">自动变量（Automatic Variables）</a></li>
-    <li><a href="#函数functions">函数（Functions）</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#make-kitty">make kitty</a></li>
-    <li><a href="#赋值符">赋值符</a></li>
-    <li><a href="#环境变量">环境变量</a></li>
-    <li><a href="#小坑">小坑</a></li>
+    <li><a href="#我们开始吧">我们开始吧</a>
+      <ul>
+        <li><a href="#自动变量automatic-variables">自动变量（Automatic Variables）</a></li>
+        <li><a href="#函数functions">函数（Functions）</a></li>
+      </ul>
+    </li>
+    <li><a href="#有一些补充">有一些补充</a>
+      <ul>
+        <li><a href="#make-kitty">make kitty</a></li>
+        <li><a href="#赋值符">赋值符</a></li>
+        <li><a href="#环境变量">环境变量</a></li>
+        <li><a href="#小坑">小坑</a></li>
+      </ul>
+    </li>
+    <li><a href="#还有一件事">还有一件事</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><blockquote>
@@ -162,7 +168,7 @@ Hello, 这是个 Makefile 的基础教程。
 </blockquote>
 <p>Hello, 这是个 <code>Makefile</code> 的基础教程。
 你将在这学到为什么 <code>make</code> 命令如此受欢迎。尽管它有着奇怪的语法，但实际上它的表达能力强而且高效，应对构建程序任务时它是个强有力的解决方案。</p>
-<h1 id="我们开始吧">我们开始吧</h1>
+<h2 id="我们开始吧">我们开始吧</h2>
 <p>你需要在含有 <code>Makefile</code> 文件的文件夹中使用 <code>make</code> 命令，也可以使用 <code>make -f &lt;makefile&gt;</code> 指定不同的文件名。
 <code>Makefile</code> 是一堆规则（rules）的集合。每个规则表明了要做的事情，比如 <code>grunt task</code> 或者 <code>npm package.json</code> 之类的。</p>
 <p>一条规则的语法如下：</p>
@@ -262,7 +268,7 @@ make: *** No rule to make target <span class="sb">`</span>source.txt<span class=
 <p>执行 <code>touch source.txt</code>，并编辑它，你会发现 <code>make result.txt</code> 又会开始重新构建。</p>
 <p>试想一下假如我们在一个项目中需要100个 <strong>.c</strong> 文件，编译成与之相对的 <strong>.o</strong> 文件，然后把这些 <strong>.o</strong> 链接到二进制文件中。（这个和将100个 <strong>.style</strong> 变成 <strong>.css</strong>，再将他们组合到一起成为 <strong>main.main.css</strong>）一条一条的创建规则简直就是一场灾难。</p>
 <p>好在 <code>make</code> 可以简化这些。通过创建一条通用的规则匹配任何符合模式的文件。然后声明另外一种匹配模式来作转换。</p>
-<h2 id="自动变量automatic-variables">自动变量（Automatic Variables）</h2>
+<h3 id="自动变量automatic-variables">自动变量（Automatic Variables）</h3>
 <p>我们可以使用一些特殊的语法来适配输入和输出文件。下面是一些自动变量（Automatic Variables），它们的值与当前规则有关：</p>
 <ul>
 <li><code>$@</code>  指代当前的目标，你可以把它当作 <code>shell</code> 脚本中的 <code>$@</code>。<code>@</code> 就像是 <code>arguments</code> 的首字母 <code>a</code> 一样。当你输入 <code>make foo</code>，<code>foo</code> 就是参数。</li>
@@ -288,7 +294,7 @@ make: *** No rule to make target <span class="sb">`</span>source.txt<span class=
 </code></pre></td></tr></table>
 </div>
 </div><p>虽然方便了许多，但比起一个一个的列出它们，我们可以用一点 <strong>shell</strong> 脚本生成他们，并放入变量中。</p>
-<h2 id="函数functions">函数（Functions）</h2>
+<h3 id="函数functions">函数（Functions）</h3>
 <p><code>make</code> 提供一些内置函数帮助我们完成更加复杂的任务，这边我们只列出几个，这也是本文例子中会用到或提及的:</p>
 <ul>
 <li><code>shell</code> 函数。 用来执行 <code>shell</code> 命令</li>
@@ -437,8 +443,8 @@ make: *** No rule to make target <span class="sb">`</span>source.txt<span class=
 </code></pre></td></tr></table>
 </div>
 </div><hr>
-<h1 id="有一些补充">有一些补充</h1>
-<h2 id="make-kitty">make kitty</h2>
+<h2 id="有一些补充">有一些补充</h2>
+<h3 id="make-kitty">make kitty</h3>
 <p>我把上面提到的一些示例整合到了一起，你可以直接试试 <code>make kitty</code> ~</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -514,7 +520,7 @@ make: *** No rule to make target <span class="sb">`</span>source.txt<span class=
 	rm -rf src dest kitty
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="赋值符">赋值符</h2>
+</div><h3 id="赋值符">赋值符</h3>
 <p>变量可以指向另外一个变量。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -583,7 +589,7 @@ c = bar
 d = bar bar
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="环境变量">环境变量</h2>
+</div><h3 id="环境变量">环境变量</h3>
 <p>你可以在 <code>Makefile</code> 中直接引入环境变量，也可以定义新的全局环境变量：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -603,7 +609,7 @@ d = bar bar
 </div>
 </div><p>这个示例会创建一个全局的环境变量 <strong>FOO</strong> ，可以在任何命令中使用。不过由于每个命令都是新的 <code>shell</code> ，所以在命令中更改这些环境变量，其他的命令中是看不到更改效果的。</p>
 <p>示例中引用的环境变量 <strong>PATH</strong> 如果不存在于调用 <code>make</code> 的 <code>shell</code> 中，也可以通过 <code>make PATH=&quot;bar&quot; env</code> 来指明 <strong>PATH</strong> 的值。</p>
-<h2 id="小坑">小坑</h2>
+<h3 id="小坑">小坑</h3>
 <p><code>Makefile</code> 对 <strong>tab</strong> 很执着，如果缩进的时候用了空格会报错的哦</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -627,7 +633,7 @@ d = bar bar
 </code></pre></td></tr></table>
 </div>
 </div><p>命令前面有 <strong>^I</strong> 的就是 <strong>tab</strong>，没有的就是空格。</p>
-<h1 id="还有一件事">还有一件事</h1>
+<h2 id="还有一件事">还有一件事</h2>
 <p>想必你已经大致的了解到了 <code>Makefile</code>，以及它能干什么。想进一步了解 <code>Makefile</code>？可以去看看它的官方手册<a href="http://www.gnu.org/software/make/manual/make.html" target="_blank" rel="noopener noreffer">GNU make</a>~</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

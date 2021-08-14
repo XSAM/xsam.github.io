@@ -140,24 +140,32 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#安装">安装</a></li>
-    <li><a href="#玩耍时间">玩耍时间！</a>
+    <li><a href="#那么什么是-tmux-呢">那么，什么是 tmux 呢？</a></li>
+    <li><a href="#概念">概念</a></li>
+    <li><a href="#开始吧">开始吧</a>
       <ul>
-        <li><a href="#创建-session">创建 session</a></li>
-        <li><a href="#创建-pane">创建 pane</a></li>
-        <li><a href="#切换-pane">切换 pane</a></li>
-        <li><a href="#退出-pane">退出 pane</a></li>
-        <li><a href="#创建-window">创建 window</a></li>
-        <li><a href="#切换-window">切换 window</a></li>
-        <li><a href="#detach-session">detach session</a></li>
+        <li><a href="#安装">安装</a></li>
+        <li><a href="#玩耍时间">玩耍时间！</a>
+          <ul>
+            <li><a href="#创建-session">创建 session</a></li>
+            <li><a href="#创建-pane">创建 pane</a></li>
+            <li><a href="#切换-pane">切换 pane</a></li>
+            <li><a href="#退出-pane">退出 pane</a></li>
+            <li><a href="#创建-window">创建 window</a></li>
+            <li><a href="#切换-window">切换 window</a></li>
+            <li><a href="#detach-session">detach session</a></li>
+          </ul>
+        </li>
+        <li><a href="#tmux-cheatsheet">tmux cheatsheet</a></li>
       </ul>
     </li>
-    <li><a href="#tmux-cheatsheet">tmux cheatsheet</a></li>
+    <li><a href="#最后">最后</a></li>
+    <li><a href="#ref">Ref</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>用了 <em>tmux</em> 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。</p>
 <p>会话的快速切换也能在需要管理多个项目时让整个流程变得非常的顺畅。在快速切换这方面 tmux 就像是终端中的窗口管理软件，对应到图形界面好比 macOS 下的窗口切换软件 <a href="https://contexts.co/" target="_blank" rel="noopener noreffer">Context</a>。（稍微改造一番后，甚至连操作都很像）</p>
-<h1 id="那么什么是-tmux-呢">那么，什么是 tmux 呢？</h1>
+<h2 id="那么什么是-tmux-呢">那么，什么是 tmux 呢？</h2>
 <p><img
         class="lazyload"
         data-src="https://i.loli.net/2019/02/06/5c5a9390261f6.jpg"
@@ -173,7 +181,7 @@
 <p><em>会话管理</em> 可以让你管理多个 <em>tty</em> ，<em>tmux</em> 会让这些 <em>tty</em> 始终保持运行，直到被手动关闭或 <em>tmux server</em> 被 kill。在 ssh 一台远程机器的时候极为有用，ssh 连接意外断开时，<em>tmux</em> 中的 <em>tty</em> 不会受到影响而停止当前工作，当重新 ssh 连接上来时，还能继续工作。</p>
 <p><em>窗口管理</em> 可以让你以多种方式显示 <em>tty</em> ，比如每个窗口都有不同的 <em>tty</em> ，切换窗口的时候显示的 <em>tty</em> 也会一起切换。</p>
 <p>如果你熟悉 <a href="https://www.gnu.org/software/screen/manual/screen.html" target="_blank" rel="noopener noreffer">Screen</a> 的话，你可以把 <em>tmux</em> 当成是 <em>Screen</em> 的加强版（至少我是这么认为的 hhhh）。</p>
-<h1 id="概念">概念</h1>
+<h2 id="概念">概念</h2>
 <p>先介绍几个小概念可以方便我们理解 <em>tmux</em> ：<em>session</em>, <em>window</em>, <em>pane</em></p>
 <ul>
 <li><strong>session</strong>: 是一堆 <em>tty</em> 的集合。一个 <em>session</em> 下可以有多个 <em>window</em> 。</li>
@@ -186,8 +194,8 @@
         </figcaption>
 </figure>
 <p>然后，每个 <em>tmux</em> 都可以连接到同一个 <em>session</em> ，甚至可以同时操作。（在同一开发机上的话，简直是结对编程神器呀）</p>
-<h1 id="开始吧">开始吧</h1>
-<h2 id="安装">安装</h2>
+<h2 id="开始吧">开始吧</h2>
+<h3 id="安装">安装</h3>
 <p>我会用一些比较新的功能，用的版本是 <code>tmux 2.8</code>（其实 2.6 以上即可），所以虽然 <em>tmux</em> 可以从包管理工具里面直接安装，但我一般选择自己编译。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -218,16 +226,16 @@ sudo make install
 </code></pre></td></tr></table>
 </div>
 </div><p>这样，就安装好了，试着输入 <code>tmux -V</code> 看看版本吧。</p>
-<h2 id="玩耍时间">玩耍时间！</h2>
-<h3 id="创建-session">创建 session</h3>
+<h3 id="玩耍时间">玩耍时间！</h3>
+<h4 id="创建-session">创建 session</h4>
 <p>首先，让我们先创建一个新的 <em>session</em> ，直接输入 <code>tmux</code> 即可快速的创建一个 <em>session</em> 。在出现的界面下方会出现一个状态栏，会有当前时间，hostname，当前窗口之类的信息（具体显示什么信息是可以配置的，tmux 很灵活，完全可以根据自己的喜好来设置）</p>
-<h3 id="创建-pane">创建 pane</h3>
+<h4 id="创建-pane">创建 pane</h4>
 <p>然后我们可以试着切分出一个 <em>pane</em> ，按下 <kbd>prefix key</kbd>     （默认设置下，tmux 绑定 <kbd>Ctrl</kbd> + <kbd>b</kbd> 作为 <strong>prefix key</strong>），松开按键后，按下 <kbd>&quot;</kbd> 会在下方竖直切分出一个新的 <em>pane</em> 。现在我们就有两个 <em>pane</em> 啦。</p>
-<h3 id="切换-pane">切换 pane</h3>
+<h4 id="切换-pane">切换 pane</h4>
 <p>现在的话我们的光标在刚刚新创建的 <em>pane</em> 里，想回到之前的 <em>pane</em> 里的话，就需要能在不同的 <em>pane</em> 之前切换的快捷键，按下 <kbd>prefix key</kbd> + <kbd>arrow key</kbd> 即可，在现在这个情况呢，就是按 <kbd>prefix key</kbd> + <kbd>方向上键</kbd>。</p>
-<h3 id="退出-pane">退出 pane</h3>
+<h4 id="退出-pane">退出 pane</h4>
 <p>退出 <em>pane</em> 的方法很简单，相当于关闭一个 <em>tty</em> ，输入 <code>exit</code> 或者 <kbd>prefix key</kbd> + <kbd>x</kbd>，按 <kbd>y</kbd> 确认即可。</p>
-<h3 id="创建-window">创建 window</h3>
+<h4 id="创建-window">创建 window</h4>
 <p>接下来我们创用 <kbd>prefix key</kbd> + <kbd>c</kbd> 建一个新的 <em>window</em> 。状态栏中也会显示新的 <em>window</em> 。</p>
 <p><img
         class="lazyload"
@@ -237,12 +245,12 @@ sudo make install
         alt="https://i.loli.net/2019/02/06/5c5ae7fe288dc.jpg"
         title="tmux new window"
     /></p>
-<h3 id="切换-window">切换 window</h3>
+<h4 id="切换-window">切换 window</h4>
 <p>按 <kbd>prefix key</kbd> + <kbd>n</kbd>/<kbd>p</kbd> 即可切换到
 左/右 边的 <em>window</em> 。如果 <em>window</em> 数量比较多呢，<del>那就多按几次（误）</del> 那就按 <kbd>prefix key</kbd> + <kbd>number key</kbd> 来快速切换，<em>window</em> 的下标会在状态栏中标出。</p>
-<h3 id="detach-session">detach session</h3>
+<h4 id="detach-session">detach session</h4>
 <p>逛了一圈之后想退出 <em>tmux</em> ？按 <kbd>prefix key</kbd> + <kbd>d</kbd> 即可 detach 当前 <em>session</em> 。<em>session</em> detach 会继续在后台执行，当你需要的时候重新 attach 上去，就可以继续工作啦。</p>
-<h2 id="tmux-cheatsheet">tmux cheatsheet</h2>
+<h3 id="tmux-cheatsheet">tmux cheatsheet</h3>
 <p>整理了 <em>tmux</em> 常用的一些快捷键，以便快速查阅：（为方便阅读，以下快捷键均忽略 <strong>prefix key</strong>）</p>
 <ul>
 <li>session
@@ -302,11 +310,11 @@ tmux kill-session -t &lt;session-name&gt;
 tmux list-keys
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="最后">最后</h1>
+</div><h2 id="最后">最后</h2>
 <p><em>tmux</em> 在默认设置下其实挺够用的了，不过还不是特别的方便。</p>
 <p>比如不能像前面提到的 <em>Context</em> 一样可以根据名字快速切换 <em>session</em> ，这在 <em>session</em> 多的时候感受尤为明显。执行程序久了，要怎么知道现在执行的是什么程序呢？这些都需要对 <em>tmux</em> 进行额外的配置。</p>
 <p>所以下一篇会介绍如何配置 <em>tmux</em> ，以及我的解决方案，并附上 <em>tmux</em> 的一些坑点。</p>
-<h1 id="ref">Ref</h1>
+<h2 id="ref">Ref</h2>
 <ul>
 <li><a href="http://man.openbsd.org/OpenBSD-current/man1/tmux.1" target="_blank" rel="noopener noreffer">http://man.openbsd.org/OpenBSD-current/man1/tmux.1</a></li>
 <li><a href="https://github.com/tmux/tmux" target="_blank" rel="noopener noreffer">https://github.com/tmux/tmux</a></li>

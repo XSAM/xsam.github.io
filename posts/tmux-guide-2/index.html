@@ -140,32 +140,38 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#开胃菜">开胃菜</a></li>
-    <li><a href="#副菜">副菜</a></li>
-    <li><a href="#主食">主食</a>
+    <li><a href="#在分享前">在分享前</a></li>
+    <li><a href="#开始吧">开始吧</a>
       <ul>
-        <li><a href="#显示当前运行程序">显示当前运行程序</a></li>
-        <li><a href="#快速切换-session">快速切换 <em>session</em></a></li>
+        <li><a href="#开胃菜">开胃菜</a></li>
+        <li><a href="#副菜">副菜</a></li>
+        <li><a href="#主食">主食</a>
+          <ul>
+            <li><a href="#显示当前运行程序">显示当前运行程序</a></li>
+            <li><a href="#快速切换-session">快速切换 <em>session</em></a></li>
+          </ul>
+        </li>
+        <li><a href="#沙拉">沙拉</a>
+          <ul>
+            <li><a href="#tmux-滚动模式的坑">tmux 滚动模式的坑</a></li>
+            <li><a href="#保存历史到文件">保存历史到文件</a></li>
+          </ul>
+        </li>
+        <li><a href="#甜点">甜点</a>
+          <ul>
+            <li><a href="#继承当前目录">继承当前目录</a></li>
+            <li><a href="#插件管理">插件管理</a></li>
+          </ul>
+        </li>
+        <li><a href="#咖啡茶">咖啡、茶</a></li>
       </ul>
     </li>
-    <li><a href="#沙拉">沙拉</a>
-      <ul>
-        <li><a href="#tmux-滚动模式的坑">tmux 滚动模式的坑</a></li>
-        <li><a href="#保存历史到文件">保存历史到文件</a></li>
-      </ul>
-    </li>
-    <li><a href="#甜点">甜点</a>
-      <ul>
-        <li><a href="#继承当前目录">继承当前目录</a></li>
-        <li><a href="#插件管理">插件管理</a></li>
-      </ul>
-    </li>
-    <li><a href="#咖啡茶">咖啡、茶</a></li>
+    <li><a href="#ref">Ref</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>上次简单介绍了 <em>tmux</em> 的一些基本概念和用法，能让我们很快的上手使用。但想用的顺手我认为还需要做些改进。</p>
 <p>所以，本篇主要分享自己目前在用的 <em>tmux</em> 配置，并附上详细说明原因，自己以后查阅也方便。</p>
-<h1 id="在分享前">在分享前</h1>
+<h2 id="在分享前">在分享前</h2>
 <p>先介绍几个概念，<em>tmux</em> 中有几种常见配置：</p>
 <ul>
 <li>快捷键(<em>key</em>)：可以通过 <code>bind-key</code> 命令来配置，比如 <code>tmux bind-key S choose-tree</code> 意思是绑定 <kbd>S</kbd> 用来触发 <em>choose-tree</em> 这个 tmux 命令（当然，要先按 <kbd>prefix key</kbd> ），效果和直接再 <em>tmux session</em> 中输入 <code>tmux choose-tree</code> 是一样的。</li>
@@ -183,8 +189,8 @@
         alt="https://i.loli.net/2019/02/06/5c5a9390261f6.jpg"
         title="tmux-sample.jpg"
     /></p>
-<h1 id="开始吧">开始吧</h1>
-<h2 id="开胃菜">开胃菜</h2>
+<h2 id="开始吧">开始吧</h2>
+<h3 id="开胃菜">开胃菜</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -229,7 +235,7 @@ set-option -ga terminal-overrides <span class="s2">&#34;,xterm-256color:Tc&#34;<
 </code></pre></td></tr></table>
 </div>
 </div><p><em>tmux</em> 中的颜色可能和 <em>shell</em> 中的有所偏差，使用如上设置使得颜色能正常显示。</p>
-<h2 id="副菜">副菜</h2>
+<h3 id="副菜">副菜</h3>
 <p>作为 <em>Vim</em> 党，当然希望 <em>tmux</em> 中也能用到一些 <em>Vim</em> 类的快捷键。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -300,8 +306,8 @@ bind-key -r M-L resize-pane -R <span class="m">5</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>使用 <kbd>Meta</kbd> + <kbd>j,k,h,l</kbd> 来调整 <em>pane</em> 大小（如果使用 iTerm 的话，可能需要把 <kbd>Option</kbd> 键位设置成，<code>Esc+</code> 键）</p>
-<h2 id="主食">主食</h2>
-<h3 id="显示当前运行程序">显示当前运行程序</h3>
+<h3 id="主食">主食</h3>
+<h4 id="显示当前运行程序">显示当前运行程序</h4>
 <p>程序输出日志多了，不清楚当前执行的程序是什么了？</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -337,7 +343,7 @@ set-option -g pane-border-status top
 </div><p>如果只显示父进程，那么结果是 <code>bash foo.sh</code>，并不能清楚知道脚本执行到哪了，我希望看到的是 <code>sleep 3600</code>，所以需要根据 <code>ps</code> 得到的结果，来获取子进程的 <em>cmd</em> 。</p>
 <p>由于平台不一样 <em>ps</em> 的实现也是不一样的。经过测试，<em>macOS</em> 和 <em>linux</em> 的 <code>ps</code> 打印出来的子进程顺序是相反的，所以两个平台要区分开来对待：<em>Darwin</em> 内核（也就是 <em>macOS</em> 的内核）的用 <code>tail -n 1</code>，<em>linux</em> 内核用 <code>head -n 1</code> 来获取子进程的 <em>cmd</em> 。</p>
 <p>关于命令中的 <code>sleep 0.25</code> 主要是因为，有时候会出现 <em>title</em> 失效不更新的情况，加入该命令可以极大的减少该情况的出现。</p>
-<h3 id="快速切换-session">快速切换 <em>session</em></h3>
+<h4 id="快速切换-session">快速切换 <em>session</em></h4>
 <p>同时打开的 <em>session</em> 有点多时，会很不方便切换。虽然 <em>tmux</em> 提供了 <kbd>prefix key</kbd> + <kbd>s</kbd> 来显示所有的 <em>session</em> 并且可以用方向键来选择切换。</p>
 <p>但还是不够好用，我想要的是像 <a href="https://contexts.co/" target="_blank" rel="noopener noreffer">Context</a> 一样的通过用 <em>session name</em> 来切换的功能，并且提供 fuzzy search，并在我打错字个别字时也能正常切换。</p>
 <p>这样我只要知道 <em>session name</em> ，闭着眼睛也能切换 <em>session</em> ，不用盯着屏幕看，不用在意 <em>session</em> 的排序位置。</p>
@@ -373,8 +379,8 @@ bind-key S choose-tree -s
         title="tmux select session"
     /></a></p>
 <p>有时候 <em>tmux</em> 自带的 <em>choose-tree</em> 也挺有用的，所以我把它的键位移到到了 <code>prefix key</code> + <code>S</code> 。</p>
-<h2 id="沙拉">沙拉</h2>
-<h3 id="tmux-滚动模式的坑">tmux 滚动模式的坑</h3>
+<h3 id="沙拉">沙拉</h3>
+<h4 id="tmux-滚动模式的坑">tmux 滚动模式的坑</h4>
 <p><em>tmux</em> 在进入 <em>copy mode</em> （查看 <em>pane</em> 历史）时，会暂停读取在 <em>pane</em> 中运行的 <em>tty</em> 的 <em>stdout</em> 和 <em>stderr</em> ，如果 <em>tty</em> 中的程序继续往标准输出中写入，那么操作系统的 <em>tty</em> 缓存最终会被填满。此时程序再写入时，为避免缓冲区溢出，操作系统会会阻塞该 IO 操作。此时该程序很有可能被阻塞，假如这个程序是个提供 web 服务的 server，那么它将停止响应所有的请求。</p>
 <p>目前 <em>tmux</em> 官方没有打算解决这个问题（可能是 <em>tmux</em> 实现原因），但有方法可以绕过这个坑。</p>
 <div class="highlight"><div class="chroma">
@@ -388,7 +394,7 @@ bind-key F capture-pane -S -10000 -b capture\; show-buffer -b capture\; send-key
 </code></pre></td></tr></table>
 </div>
 </div><p>原理是捕获当前历史，保存到 <em>tmux</em> buffer 中，然后再显示 buffer 的内容。这个方案和 <em>copy mode</em> 的区别就是会丢失 <em>shell</em> 中的颜色。（<em>tmux</em> <code>show-buffer</code> 命令不支持显示颜色）</p>
-<h3 id="保存历史到文件">保存历史到文件</h3>
+<h4 id="保存历史到文件">保存历史到文件</h4>
 <p><em>tmux</em> 中的历史不能像普通的 <em>shell</em> 一样，可以通过滚动终端类软件的自带的历史记录来截取日志，假如要截取的日志很长一段，没法直接在一个页面中打印出来怎么办？</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -399,8 +405,8 @@ bind-key F capture-pane -S -10000 -b capture\; show-buffer -b capture\; send-key
 </code></pre></td></tr></table>
 </div>
 </div><p>按下 <kbd>prefix key</kbd> + <kbd>P</kbd> 即可把历史记录保存到文件中，然后想怎么分析就怎么分析 xD 。</p>
-<h2 id="甜点">甜点</h2>
-<h3 id="继承当前目录">继承当前目录</h3>
+<h3 id="甜点">甜点</h3>
+<h4 id="继承当前目录">继承当前目录</h4>
 <p>打开一个新的 <em>pane</em> 或 <em>window</em> ，当前目录不会继承自上一个 <em>pane</em> ，每次都会在用户目录，挺不方便的。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -422,7 +428,7 @@ bind-key &#39;&#34;&#39; split-window -v -c &#39;#{pane_current_path}&#39;
 bind-key c new-window -c &#39;#{pane_current_path}&#39;
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="插件管理">插件管理</h3>
+</div><h4 id="插件管理">插件管理</h4>
 <p><a href="https://github.com/tmux-plugins/tpm" target="_blank" rel="noopener noreffer">tpm</a> 是 <em>tmux</em> 中的插件管理器，可以用来安装管理自己喜欢的 <em>tmux</em> 插件，非常方便。</p>
 <p>安装</p>
 <div class="highlight"><div class="chroma">
@@ -469,7 +475,7 @@ run -b <span class="s1">&#39;~/.tmux/plugins/tpm/tpm&#39;</span>
 <li><code>XSAM/tmux-themepack</code>: 我改的主题（自认为还挺好看的 xD)</li>
 <li><code>tmux-plugins/tmux-resurrect</code>: 能保存 <em>tmux</em> 的 <em>session</em> 结构，这样关机重启之后，能马上恢复</li>
 </ul>
-<h2 id="咖啡茶">咖啡、茶</h2>
+<h3 id="咖啡茶">咖啡、茶</h3>
 <p>我维护了一个叫 <a href="https://github.com/XSAM/kinda-lazy" target="_blank" rel="noopener noreffer">kind-lazy</a> 的项目，提供一些程序的快速安装脚本，其中也有本文提到的 <em>tmux</em> 配置。</p>
 <p>快速安装 <em>tmux</em> ：</p>
 <div class="highlight"><div class="chroma">
@@ -484,9 +490,9 @@ run -b <span class="s1">&#39;~/.tmux/plugins/tpm/tpm&#39;</span>
 bash lazy_install.sh
 </code></pre></td></tr></table>
 </div>
-</div><p>喜欢的话可以给项目点个 <em>Star</em> :satisfied:</p>
+</div><p>喜欢的话可以给项目点个 <em>Star</em> 🚀</p>
 <p>Enjoy!</p>
-<h1 id="ref">Ref</h1>
+<h2 id="ref">Ref</h2>
 <ul>
 <li><a href="http://man.openbsd.org/OpenBSD-current/man1/tmux.1" target="_blank" rel="noopener noreffer">http://man.openbsd.org/OpenBSD-current/man1/tmux.1</a></li>
 <li><a href="https://stackoverflow.com/questions/13924365/rails-freezes-when-searching-through-tmux-output-buffer" target="_blank" rel="noopener noreffer">https://stackoverflow.com/questions/13924365/rails-freezes-when-searching-through-tmux-output-buffer</a></li>

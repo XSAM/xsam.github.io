@@ -144,18 +144,27 @@ Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到�
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#抛-12-个球">抛 12 个球！</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#gpg-snippets">GPG snippets</a></li>
+    <li><a href="#准备工作">准备工作</a></li>
+    <li><a href="#布置马戏团">布置马戏团</a></li>
+    <li><a href="#拿到表演钥匙">拿到表演钥匙</a></li>
+    <li><a href="#杂耍">杂耍</a>
+      <ul>
+        <li><a href="#抛-12-个球">抛 12 个球！</a></li>
+      </ul>
+    </li>
+    <li><a href="#还有一件事">还有一件事</a>
+      <ul>
+        <li><a href="#gpg-snippets">GPG snippets</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考">参考</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>最近入手了一个 <a href="https://zh.wikipedia.org/wiki/YubiKey" target="_blank" rel="noopener noreffer">Yubikey</a>，其中用来做 SSH 登录。一路操作下来，踩不少坑，等到终于使用 Yubikey 中的 Authentication key 登录上机器后发现：</p>
 <p><strong>我好像没法拿着这个 Yubikey 随便找台机器登录呀</strong>（并不包括 Windows）。</p>
 <p>Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到处登录笔记软件吧。</p>
 <p>所以为了满足能随便找台机器都能登录这一需求（伪），特此写（水）一篇文章，介绍一下如何使用 Yubikey SSH 登录机器。</p>
-<h1 id="准备工作">准备工作</h1>
+<h2 id="准备工作">准备工作</h2>
 <ul>
 <li>配置好 <code>OpenPGP</code> 功能的 Yubikey</li>
 </ul>
@@ -164,7 +173,7 @@ Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到�
 <li>随便找到的使用 <code>*nix</code> 操作系统的机器</li>
 <li>安装好 <code>GnuPG</code> 套件</li>
 </ul>
-<h1 id="布置马戏团">布置马戏团</h1>
+<h2 id="布置马戏团">布置马戏团</h2>
 <p>把这段脚本放到 <strong>shell</strong> profile 中：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -214,13 +223,13 @@ max-cache-ttl <span class="m">7200</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>pinentry-program</code> 这边给出的是 <em>macOS</em> 的示例，其他的 OS 可以参考这个<a href="https://unix.stackexchange.com/questions/236746/change-pinentry-program-temporarily-with-gpg-agent" target="_blank" rel="noopener noreffer">回答</a>。</p>
-<h1 id="拿到表演钥匙">拿到表演钥匙</h1>
+<h2 id="拿到表演钥匙">拿到表演钥匙</h2>
 <p>输入 <code>gpgconf --reload gpg-agent</code> 重载配置，插上 Yubikey，GnuPG 会自动检测到并把 key 加入到 agent 里面。</p>
 <p>接着 <code>ssh-add -L</code> 就能看到一个备注为 <code>cardno:card-id</code> 或 <code>openpgp:key-id</code> 的 SSH pubilc key 了。</p>
-<h1 id="杂耍">杂耍！</h1>
+<h2 id="杂耍">杂耍</h2>
 <p>找台机器（或者可以 ssh 自己），公钥一丢，直接 <code>ssh</code> 走起，输入 <em>Yubikey</em> PIN 后，直接就登录上去了。</p>
 <p>完全不需要把 private key 复制到机器上冒着泄漏的风险，想在哪登，就在哪登。（所以我为啥不出门自带机器。。。（这不重要！））</p>
-<h2 id="抛-12-个球">抛 12 个球！</h2>
+<h3 id="抛-12-个球">抛 12 个球！</h3>
 <p>如果希望让整个 SSH 授权过程更为庄重（增加节目效果），你可以在授权前要求触碰 Yubikey 才能完成授权。</p>
 <p>通过安装官方的 <a href="https://github.com/Yubico/yubikey-manager" target="_blank" rel="noopener noreffer">ykman</a> 设置：</p>
 <div class="highlight"><div class="chroma">
@@ -235,9 +244,9 @@ max-cache-ttl <span class="m">7200</span>
 <blockquote>
 <p>When the yubikey is pressed, then you have my permission to die (authenticate) &ndash; Bane (</p>
 </blockquote>
-<h1 id="还有一件事">还有一件事</h1>
+<h2 id="还有一件事">还有一件事</h2>
 <p>目前这个方案用户体验上有个不舒服的地方，每次 <code>ssh-add</code> 添加普通的 SSH key 的时候，GPG 都会跳出来要求一个密码用来保护加入的 SSH secret key。好在添加 SSH key 不算是高频操作，所以也还能接受。</p>
-<h2 id="gpg-snippets">GPG snippets</h2>
+<h3 id="gpg-snippets">GPG snippets</h3>
 <p>放上一些 GPG snippet，方便查阅。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -273,7 +282,7 @@ pgp --export-ssh-key &lt;Key ID&gt;
 gpg-connect-agent /bye
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="参考">参考</h1>
+</div><h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://wiki.archlinux.org/index.php/GnuPG#SSH_agent" target="_blank" rel="noopener noreffer">https://wiki.archlinux.org/index.php/GnuPG#SSH_agent</a></li>
 <li><a href="https://blog.dwx.io/yubikey4" target="_blank" rel="noopener noreffer">https://blog.dwx.io/yubikey4</a></li>
