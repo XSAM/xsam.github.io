@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">Theme Preview - Casually Typing Like a Monkey</title><meta name="Description" content="Casually Typing Like a Monkey"><meta property="og:title" content="Theme Preview" />
+<meta property="og:description" content="
+Copy from 《Hugo 主题 Nuo 文章样式预览》
+
+这篇文章集中说明主题所支持的 Markdown 语法和 Hugo Shortcodes 插件，你也可以在这里预览到他们的样子。如果你不喜欢某些样式，可以去修改 css/ 文件夹下的 .scss 文件。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://samxie.me/posts/theme-preview/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-01-20T17:03:25+08:00" />
+<meta property="article:modified_time" content="2018-01-20T17:03:25+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Theme Preview"/>
+<meta name="twitter:description" content="
+Copy from 《Hugo 主题 Nuo 文章样式预览》
+
+这篇文章集中说明主题所支持的 Markdown 语法和 Hugo Shortcodes 插件，你也可以在这里预览到他们的样子。如果你不喜欢某些样式，可以去修改 css/ 文件夹下的 .scss 文件。"/>
+<meta name="application-name" content="Casually Typing Like a Monkey">
+<meta name="apple-mobile-web-app-title" content="Casually Typing Like a Monkey">
+
+<meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://samxie.me/posts/theme-preview/" /><link rel="next" href="https://samxie.me/posts/makefile-basic-tutorial/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><meta name="google-site-verification" content="vq0HEt1rnOOztPmqqNORsLauJwH1nSfLOtF5f0IUmrc" /><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Theme Preview",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/samxie.me\/posts\/theme-preview\/"
+        },"genre": "posts","keywords": "Started","wordcount":  229 ,
+        "url": "https:\/\/samxie.me\/posts\/theme-preview\/","datePublished": "2018-01-20T17:03:25+08:00","dateModified": "2018-01-20T17:03:25+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Sam Xie"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let themeColorMeta = getMeta('theme-color');
+        if (document.body.getAttribute('theme') != 'light') themeColorMeta.content = '#000000';
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Casually Typing Like a Monkey">Casually Typing Like a Monkey</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" onclick="return false;" class="menu-item theme-select" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="Switch Theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="black">Black</option>
+                        <option value="auto">Auto</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Casually Typing Like a Monkey">Casually Typing Like a Monkey</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" onclick="return false;" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="#" onclick="return false;" class="menu-item theme-select" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="Switch Theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="black">Black</option>
+                    <option value="auto">Auto</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content always-active" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Theme Preview</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sam Xie</a>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-01-20">2018-01-20</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2018-01-20">2018-01-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;229 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#h2">H2</a>
+      <ul>
+        <li><a href="#h3">H3</a>
+          <ul>
+            <li><a href="#h4">H4</a>
+              <ul>
+                <li><a href="#h5">H5</a>
+                  <ul>
+                    <li><a href="#h6">H6</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#2-段落">2. 段落</a></li>
+    <li><a href="#3-列表">3. 列表</a>
+      <ul>
+        <li><a href="#31-无序列表">3.1 无序列表</a></li>
+        <li><a href="#32-有序列表">3.2 有序列表</a></li>
+        <li><a href="#33-定义列表">3.3 定义列表</a></li>
+        <li><a href="#34-任务列表">3.4 任务列表</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-引用">4. 引用</a></li>
+    <li><a href="#5-代码">5. 代码</a></li>
+    <li><a href="#6-分割线">6. 分割线</a></li>
+    <li><a href="#section-07">7. 图片</a></li>
+    <li><a href="#8-表格">8. 表格</a></li>
+    <li><a href="#9-数学公式">9. 数学公式</a></li>
+    <li><a href="#10-网易云音乐">10. 网易云音乐</a></li>
+    <li><a href="#11-youtube">11. YouTube</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p>Copy from <a href="https://laozhu.me/post/hugo-nuo-post-preview/" target="_blank" rel="noopener noreffer">《Hugo 主题 Nuo 文章样式预览》</a></p>
+</blockquote>
+<p>这篇文章集中说明主题所支持的 Markdown 语法和 Hugo Shortcodes 插件，你也可以在这里预览到他们的样子。如果你不喜欢某些样式，可以去修改 css/ 文件夹下的 .scss 文件。</p>
+<h1 id="1标题">1.标题</h1>
+<h1 id="h1">H1</h1>
+<h2 id="h2">H2</h2>
+<h3 id="h3">H3</h3>
+<h4 id="h4">H4</h4>
+<h5 id="h5">H5</h5>
+<h6 id="h6">H6</h6>
+<h2 id="2-段落">2. 段落</h2>
+<p>使用单引号 <code>*</code> 或者单下划线 <code>_</code> 标记 <em>斜体强调</em> 或者 <em>斜体强调</em></p>
+<p>使用两个引号 <code>**</code> 或者两个下划线 <code>__</code> 标记 <strong>加粗强调</strong> 或者 <strong>加粗强调</strong></p>
+<p>引号和下划线可叠加使用 → <strong>只是加粗 <em>斜体并加粗</em></strong></p>
+<p>使用两个波浪线 <code>~~</code> 标记 <del>已删除文字</del></p>
+<p>插入文字暂无 <code>Markdown</code> 标记，直接使用 <code>HTML</code> 标签 <code>&lt;ins&gt;</code> 标记 <ins>插入文字</ins></p>
+<p>行内代码使用反引号标记 → <code>print(&quot;hello world&quot;)</code></p>
+<p>上标 X<sup>2</sup> / 下标 X<sub>2</sub></p>
+<p>按键 <kbd>Ctrl</kbd></p>
+<p>外链 <a href="https://chekun.me" target="_blank" rel="noopener noreffer">chekun&rsquo;s blog</a></p>
+<p>页面内段落 <a href="#section-07" rel="">图片</a></p>
+<p><em>注意：你可以通过 <code>{#section-id}</code> 方式自定义段落锚点</em></p>
+<p>参考资料 <sup><a href="#ref01" rel="">[1]</a></sup><sup><a href="#ref02" rel="">[2]</a></sup></p>
+<h2 id="3-列表">3. 列表</h2>
+<p>以下的无序、有序和任务列表均支持二级嵌套，不建议使用二级以上嵌套。</p>
+<h3 id="31-无序列表">3.1 无序列表</h3>
+<ul>
+<li>无序列表
+<ul>
+<li>嵌套的无序列表</li>
+<li>嵌套的无序列表</li>
+</ul>
+</li>
+<li>无序列表
+<ol>
+<li>嵌套的有序列表</li>
+<li>嵌套的有序列表</li>
+</ol>
+</li>
+<li>无序列表</li>
+</ul>
+<h3 id="32-有序列表">3.2 有序列表</h3>
+<ol>
+<li>有序列表</li>
+<li>嵌套的有序列表</li>
+<li>嵌套的有序列表</li>
+<li>有序列表</li>
+</ol>
+<ul>
+<li>嵌套的无序列表</li>
+<li>嵌套的无序列表</li>
+</ul>
+<ol start="3">
+<li>有序列表</li>
+</ol>
+<h3 id="33-定义列表">3.3 定义列表</h3>
+<dl>
+<dt>CSS</dt>
+<dd>层叠样式表</dd>
+</dl>
+<h3 id="34-任务列表">3.4 任务列表</h3>
+<ul>
+<li><i class="far fa-square fa-fw"></i> Cmd Markdown 开发
+<ul>
+<li><i class="far fa-square fa-fw"></i> 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率</li>
+<li><i class="far fa-square fa-fw"></i> 支持以 PDF 格式导出文稿</li>
+<li><i class="far fa-check-square fa-fw"></i> 新增Todo列表功能 <a href="https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments" target="_blank" rel="noopener noreffer">语法参考</a></li>
+<li><i class="far fa-check-square fa-fw"></i> 改进 LaTex 功能</li>
+<li><i class="far fa-check-square fa-fw"></i> 修复 LaTex 公式渲染问题</li>
+<li><i class="far fa-check-square fa-fw"></i> 新增 LaTex 公式编号功能 <a href="http://docs.mathjax.org/en/latest/tex.html#tex-eq-numbers" target="_blank" rel="noopener noreffer">语法参考</a></li>
+</ul>
+</li>
+<li><i class="far fa-square fa-fw"></i> 七月旅行准备
+<ul>
+<li><i class="far fa-square fa-fw"></i> 准备邮轮上需要携带的物品</li>
+<li><i class="far fa-square fa-fw"></i> 浏览日本免税店的物品</li>
+<li><i class="far fa-check-square fa-fw"></i> 购买蓝宝石公主号七月一日的船票</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-引用">4. 引用</h2>
+<blockquote>
+<p>野火烧不尽，春风吹又生。</p>
+<p><cite>&ndash; 白居易《赋得古原草送别》</cite></p>
+</blockquote>
+<h2 id="5-代码">5. 代码</h2>
+<p>以本站的一段 <code>JavaScript</code> 代码做演示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// Initialize video.js player
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;my-player&#39;</span><span class="p">)</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/* eslint-disable no-undef */</span>
+  <span class="nx">videojs</span><span class="p">(</span><span class="s1">&#39;#my-player&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">aspectRatio</span><span class="o">:</span> <span class="s1">&#39;16:9&#39;</span><span class="p">,</span>
+    <span class="nx">fluid</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="6-分割线">6. 分割线</h2>
+<hr>
+<p>中间能写字的分割线，如果你修改了分割线中字的内容，请配合修改 <code>CSS</code> 样式。</p>
+<h2 id="section-07">7. 图片</h2>
+<p>不带标题的图片，如下图👇</p>
+<p><figure><a class="lightgallery" href="https://raw.githubusercontent.com/olOwOlo/hugo-theme-even/master/images/showcase.png" title="hugo even showcase" data-thumbnail="https://raw.githubusercontent.com/olOwOlo/hugo-theme-even/master/images/showcase.png" data-sub-html="<h2>showcase.png</h2><p>hugo even showcase</p>">
+        <img
+            class="lazyload"
+            data-src="https://raw.githubusercontent.com/olOwOlo/hugo-theme-even/master/images/showcase.png"
+            data-srcset="https://raw.githubusercontent.com/olOwOlo/hugo-theme-even/master/images/showcase.png, https://raw.githubusercontent.com/olOwOlo/hugo-theme-even/master/images/showcase.png 1.5x, https://raw.githubusercontent.com/olOwOlo/hugo-theme-even/master/images/showcase.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/olOwOlo/hugo-theme-even/master/images/showcase.png"
+        />
+    </a><figcaption class="image-caption">showcase.png</figcaption>
+    </figure></p>
+<p>带标题的图片，如下图👇</p>
+<figure class="center"><img src="https://raw.githubusercontent.com/olOwOlo/hugo-theme-even/master/images/showcase.png"
+         alt="hugo even showcase"/><figcaption>
+            <h4>showcase.png</h4>
+        </figcaption>
+</figure>
+<h2 id="8-表格">8. 表格</h2>
+<p>使用 <code>Markdown</code> 画的表格，如下表👇</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Tables</th>
+<th style="text-align:center">Are</th>
+<th style="text-align:right">Cool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">col 3 is</td>
+<td style="text-align:center">right-aligned</td>
+<td style="text-align:right">$1600</td>
+</tr>
+<tr>
+<td style="text-align:left">col 2 is</td>
+<td style="text-align:center">centered</td>
+<td style="text-align:right">$12</td>
+</tr>
+<tr>
+<td style="text-align:left">zebra stripes</td>
+<td style="text-align:center">are neat</td>
+<td style="text-align:right">$1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-数学公式">9. 数学公式</h2>
+<p>主题使用了 <a href="https://www.mathjax.org/" target="_blank" rel="noopener noreffer">MathJax</a> 开源库来实现对数学公式的支持，使用 <code>$$</code> 标记。</p>
+<p>$$ evidence_{i}=\sum_{j}W_{ij}x_{j}+b_{i} $$</p>
+<h2 id="10-网易云音乐">10. 网易云音乐</h2>
+<p>主题文章中可以轻松插入 <a href="https://music.163.com/" target="_blank" rel="noopener noreffer">网易云音乐</a> 的指定音乐，你可以根据需要将音乐设置为自动播放，在主题目录 <code>layouts/shortcodes</code> 文件夹下的 <code>music.html</code> 对该标签进行定义。</p>
+<p><meting-js server="2299986" type="" id="" theme="#448aff"></meting-js></p>
+<h2 id="11-youtube">11. YouTube</h2>
+<p>由于不明原因可能无法播放。</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/wC5pJm8RAu4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2018-01-20</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/started/">Started</a></section>
+        <section>
+            <span><a href="#" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/posts/makefile-basic-tutorial/" class="next" rel="next" title="Makefile 基础教程">Makefile 基础教程<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.87.0">Hugo</a> | Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2018 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sam Xie</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/fuse/fuse.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="https://samxie.disqus.com/embed.js" defer></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/aplayer/APlayer.min.js"></script><script type="text/javascript" src="/lib/meting/Meting.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"music":true,"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"No results found","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/aplayer/APlayer.min.css"><link rel="stylesheet" href="/lib/aplayer/dark.min.css"></div>
+</body>
+
+</html>

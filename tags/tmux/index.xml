@@ -1,37 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>tmux on Casually Typing Like a Monkey</title>
-    <link>https://samxie.me/tags/tmux/</link>
-    <description>Recent content in tmux on Casually Typing Like a Monkey</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sat, 23 Feb 2019 14:47:00 +0800</lastBuildDate>
-    
-	<atom:link href="https://samxie.me/tags/tmux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>tmux 简易指南（二）</title>
-      <link>https://samxie.me/post/tmux-guide-2/</link>
-      <pubDate>Sat, 23 Feb 2019 14:47:00 +0800</pubDate>
-      
-      <guid>https://samxie.me/post/tmux-guide-2/</guid>
-      <description>&lt;p&gt;上次简单介绍了 &lt;em&gt;tmux&lt;/em&gt; 的一些基本概念和用法，能让我们很快的上手使用。但想用的顺手我认为还需要做些改进。&lt;/p&gt;
-
-&lt;p&gt;所以，本篇主要分享自己目前在用的 &lt;em&gt;tmux&lt;/em&gt; 配置，并附上详细说明原因，自己以后查阅也方便。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>tmux 简易指南（一）</title>
-      <link>https://samxie.me/post/tmux-guide-1/</link>
-      <pubDate>Wed, 06 Feb 2019 15:13:09 +0800</pubDate>
-      
-      <guid>https://samxie.me/post/tmux-guide-1/</guid>
-      <description>&lt;p&gt;用了 &lt;em&gt;tmux&lt;/em&gt; 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。&lt;/p&gt;
-
-&lt;p&gt;会话的快速切换也能在需要管理多个项目时让整个流程变得非常的顺畅。在快速切换这方面 tmux 就像是终端中的窗口管理软件，对应到图形界面好比 macOS 下的窗口切换软件 &lt;a href=&#34;https://contexts.co/&#34;&gt;Context&lt;/a&gt;。（稍微改造一番后，甚至连操作都很像）&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>tmux - Tag - Casually Typing Like a Monkey</title>
+        <link>https://samxie.me/tags/tmux/</link>
+        <description>tmux - Tag - Casually Typing Like a Monkey</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 23 Feb 2019 14:47:00 &#43;0800</lastBuildDate><atom:link href="https://samxie.me/tags/tmux/" rel="self" type="application/rss+xml" /><item>
+    <title>tmux 简易指南（二）</title>
+    <link>https://samxie.me/posts/tmux-guide-2/</link>
+    <pubDate>Sat, 23 Feb 2019 14:47:00 &#43;0800</pubDate><author>
+        <name>Sam Xie</name>
+    </author><guid>https://samxie.me/posts/tmux-guide-2/</guid>
+    <description><![CDATA[<p>上次简单介绍了 <em>tmux</em> 的一些基本概念和用法，能让我们很快的上手使用。但想用的顺手我认为还需要做些改进。</p>
+<p>所以，本篇主要分享自己目前在用的 <em>tmux</em> 配置，并附上详细说明原因，自己以后查阅也方便。</p>]]></description>
+</item><item>
+    <title>tmux 简易指南（一）</title>
+    <link>https://samxie.me/posts/tmux-guide-1/</link>
+    <pubDate>Wed, 06 Feb 2019 15:13:09 &#43;0800</pubDate><author>
+        <name>Sam Xie</name>
+    </author><guid>https://samxie.me/posts/tmux-guide-1/</guid>
+    <description><![CDATA[<p>用了 <em>tmux</em> 有一段时间了，特别的喜欢这个软件。平时工作中不仅会用它来进行大量的分屏操作，远程连接时意外断开，还能保持原有的工作不被打算。</p>
+<p>会话的快速切换也能在需要管理多个项目时让整个流程变得非常的顺畅。在快速切换这方面 tmux 就像是终端中的窗口管理软件，对应到图形界面好比 macOS 下的窗口切换软件 <a href="https://contexts.co/" target="_blank" rel="noopener noreffer">Context</a>。（稍微改造一番后，甚至连操作都很像）</p>]]></description>
+</item></channel>
 </rss>

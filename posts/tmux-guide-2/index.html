@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">tmux 简易指南（二） - Casually Typing Like a Monkey</title><meta name="Description" content="Casually Typing Like a Monkey"><meta property="og:title" content="tmux 简易指南（二）" />
+<meta property="og:description" content="上次简单介绍了 tmux 的一些基本概念和用法，能让我们很快的上手使用。但想用的顺手我认为还需要做些改进。
+所以，本篇主要分享自己目前在用的 tmux 配置，并附上详细说明原因，自己以后查阅也方便。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://samxie.me/posts/tmux-guide-2/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-02-23T14:47:00+08:00" />
+<meta property="article:modified_time" content="2019-02-23T14:47:00+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="tmux 简易指南（二）"/>
+<meta name="twitter:description" content="上次简单介绍了 tmux 的一些基本概念和用法，能让我们很快的上手使用。但想用的顺手我认为还需要做些改进。
+所以，本篇主要分享自己目前在用的 tmux 配置，并附上详细说明原因，自己以后查阅也方便。"/>
+<meta name="application-name" content="Casually Typing Like a Monkey">
+<meta name="apple-mobile-web-app-title" content="Casually Typing Like a Monkey">
+
+<meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://samxie.me/posts/tmux-guide-2/" /><link rel="prev" href="https://samxie.me/posts/tmux-guide-1/" /><link rel="next" href="https://samxie.me/posts/yubikey-with-ssh/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><meta name="google-site-verification" content="vq0HEt1rnOOztPmqqNORsLauJwH1nSfLOtF5f0IUmrc" /><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "tmux 简易指南（二）",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/samxie.me\/posts\/tmux-guide-2\/"
+        },"genre": "posts","keywords": "tmux","wordcount":  799 ,
+        "url": "https:\/\/samxie.me\/posts\/tmux-guide-2\/","datePublished": "2019-02-23T14:47:00+08:00","dateModified": "2019-02-23T14:47:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Sam Xie"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let themeColorMeta = getMeta('theme-color');
+        if (document.body.getAttribute('theme') != 'light') themeColorMeta.content = '#000000';
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Casually Typing Like a Monkey">Casually Typing Like a Monkey</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" onclick="return false;" class="menu-item theme-select" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="Switch Theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="black">Black</option>
+                        <option value="auto">Auto</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Casually Typing Like a Monkey">Casually Typing Like a Monkey</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" onclick="return false;" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="#" onclick="return false;" class="menu-item theme-select" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="Switch Theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="black">Black</option>
+                    <option value="auto">Auto</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content always-active" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">tmux 简易指南（二）</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sam Xie</a>
+                </span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/programming/"><i class="far fa-folder fa-fw"></i>Programming</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-02-23">2019-02-23</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2019-02-23">2019-02-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;799 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#开胃菜">开胃菜</a></li>
+    <li><a href="#副菜">副菜</a></li>
+    <li><a href="#主食">主食</a>
+      <ul>
+        <li><a href="#显示当前运行程序">显示当前运行程序</a></li>
+        <li><a href="#快速切换-session">快速切换 <em>session</em></a></li>
+      </ul>
+    </li>
+    <li><a href="#沙拉">沙拉</a>
+      <ul>
+        <li><a href="#tmux-滚动模式的坑">tmux 滚动模式的坑</a></li>
+        <li><a href="#保存历史到文件">保存历史到文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#甜点">甜点</a>
+      <ul>
+        <li><a href="#继承当前目录">继承当前目录</a></li>
+        <li><a href="#插件管理">插件管理</a></li>
+      </ul>
+    </li>
+    <li><a href="#咖啡茶">咖啡、茶</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>上次简单介绍了 <em>tmux</em> 的一些基本概念和用法，能让我们很快的上手使用。但想用的顺手我认为还需要做些改进。</p>
+<p>所以，本篇主要分享自己目前在用的 <em>tmux</em> 配置，并附上详细说明原因，自己以后查阅也方便。</p>
+<h1 id="在分享前">在分享前</h1>
+<p>先介绍几个概念，<em>tmux</em> 中有几种常见配置：</p>
+<ul>
+<li>快捷键(<em>key</em>)：可以通过 <code>bind-key</code> 命令来配置，比如 <code>tmux bind-key S choose-tree</code> 意思是绑定 <kbd>S</kbd> 用来触发 <em>choose-tree</em> 这个 tmux 命令（当然，要先按 <kbd>prefix key</kbd> ），效果和直接再 <em>tmux session</em> 中输入 <code>tmux choose-tree</code> 是一样的。</li>
+<li>变量(<em>option</em>)：比如 <code>tmux set-option history-limit 10000</code> 是设置 <em>tmux</em> 的历史长度</li>
+</ul>
+<p>这些配置都可以放到 <code>~/.tmux.conf</code> 这个文件下，<em>tmux</em> 第一次启动时，会加载这些配置。</p>
+<p>在运行 <em>tmux</em> 时，可以通过 <kbd>prefix key</kbd> + <kbd>:</kbd>，然后输入 <code>source-file ~/.tmux.conf</code> 手动重新加载配置。不过呢，和 <em>shell</em> 一样，<em>tmux</em> 加载配置只是修改配置中对于的变量，对于旧的没被覆盖的配置，还是会在的。</p>
+<p>所以有时候我会 <code>tmux kill-server</code> 直接杀掉 <em>tmux</em> 进程，再重新打开 <em>tmux</em> 来保证配置加载的完整性。</p>
+<p>放一张配置完的图，也是上一篇的第一张图
+<img
+        class="lazyload"
+        data-src="https://i.loli.net/2019/02/06/5c5a9390261f6.jpg"
+        data-srcset="https://i.loli.net/2019/02/06/5c5a9390261f6.jpg, https://i.loli.net/2019/02/06/5c5a9390261f6.jpg 1.5x, https://i.loli.net/2019/02/06/5c5a9390261f6.jpg 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2019/02/06/5c5a9390261f6.jpg"
+        title="tmux-sample.jpg"
+    /></p>
+<h1 id="开始吧">开始吧</h1>
+<h2 id="开胃菜">开胃菜</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Common config</span>
+set-option -g set-titles on
+set-option -g set-titles-string <span class="s2">&#34;#S / #W&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><em>tmux</em> 默认不会改 <em>Terminal</em> 的 title，所以在终端软件的 tab 名字里面只有 &ldquo;tmux&rdquo;，这对于同时要开很多个 tab 的人来说很不友好。所以我开启了 <em>title</em> ，并把它的格式改为 <code>当前 session 名字 / 当前 window 名字</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">set-option -g repeat-time <span class="m">1000</span>  <span class="c1"># default is 500</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><em>tmux</em> 在执行连续的快捷键时（比如切换 <em>pane</em> ），默认只有 <em>500ms</em> 的等待时间，超过这个时间，就会退回到正常输入模式，有时候稍微按得慢一点（也可能是我手残），就要重新按 <kbd>prefix key</kbd> 来重新输入快捷键，所以我把他改为 <em>1s</em> 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">set-option -g history-limit <span class="m">10000</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>默认的历史行数比较小，改大一点，看程序日志的时候不至于被吃掉。（有时候我会吧 <em>tmux</em> 当成临时的 <em>supervisor</em> 进程管理解决方案）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Terminal type configuration</span>
+set-option -g default-terminal <span class="s2">&#34;screen-256color&#34;</span>
+set-option -ga terminal-overrides <span class="s2">&#34;,xterm-256color:Tc&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><em>tmux</em> 中的颜色可能和 <em>shell</em> 中的有所偏差，使用如上设置使得颜色能正常显示。</p>
+<h2 id="副菜">副菜</h2>
+<p>作为 <em>Vim</em> 党，当然希望 <em>tmux</em> 中也能用到一些 <em>Vim</em> 类的快捷键。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">set-window-option -g mode-keys vi
+</code></pre></td></tr></table>
+</div>
+</div><p>这样就可以在滚动模式（copy-mode）中，使用一些 <em>Vim</em> 键位了。</p>
+<p>不过我觉得这还不够 <em>Vim</em> ，还需要进一步的设置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Move &amp; Copy while scrolling</span>
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+bind-key -T copy-mode-vi u send-keys -X halfpage-up
+bind-key -T copy-mode-vi d send-keys -X halfpage-down
+</code></pre></td></tr></table>
+</div>
+</div><p>浏览历史的时候，可以用 <kbd>v</kbd> 选择，<kbd>y</kbd> 复制，<kbd>u</kbd>/<kbd>d</kbd> 翻页。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Select pane</span>
+bind-key -r j <span class="k">select</span>-pane -D
+bind-key -r k <span class="k">select</span>-pane -U
+bind-key -r h <span class="k">select</span>-pane -L
+bind-key -r l <span class="k">select</span>-pane -R
+</code></pre></td></tr></table>
+</div>
+</div><p>使用 <kbd>j,k,h,l</kbd> 来选择 <em>pane</em> 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">bind-key -r M-j resize-pane -D
+bind-key -r M-k resize-pane -U
+bind-key -r M-h resize-pane -L
+bind-key -r M-l resize-pane -R
+
+bind-key -r M-J resize-pane -D <span class="m">5</span>
+bind-key -r M-K resize-pane -U <span class="m">5</span>
+bind-key -r M-H resize-pane -L <span class="m">5</span>
+bind-key -r M-L resize-pane -R <span class="m">5</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用 <kbd>Meta</kbd> + <kbd>j,k,h,l</kbd> 来调整 <em>pane</em> 大小（如果使用 iTerm 的话，可能需要把 <kbd>Option</kbd> 键位设置成，<code>Esc+</code> 键）</p>
+<h2 id="主食">主食</h2>
+<h3 id="显示当前运行程序">显示当前运行程序</h3>
+<p>程序输出日志多了，不清楚当前执行的程序是什么了？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Pane border</span>
+set-option -g pane-border-status top
+<span class="c1"># Show current cmd</span>
+<span class="k">if</span>-shell <span class="s2">&#34;uname | grep -q Darwin&#34;</span> <span class="se">\
+</span><span class="se"></span>  <span class="s2">&#34;set-option -g pane-border-format &#39; #P: #(sleep 0.25; ps -t #{pane_tty} -o args= | tail -n 1) &#39;&#34;</span>
+<span class="k">if</span>-shell <span class="s2">&#34;uname | grep -q Linux&#34;</span> <span class="se">\
+</span><span class="se"></span>  <span class="s2">&#34;set-option -g pane-border-format &#39; #P: #(sleep 0.25; ps -t #{pane_tty} -o args= --sort=etime | head -n 1) &#39;&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我的方案是打开 <em>pane</em> 的 <em>title</em> ，然后把 <em>title</em> 设置为当前执行的程序 <em>cmd</em> 。</p>
+<p>原理为使用 <code>ps</code> 命令显示当前 <em>tty</em> 下执行的进程，并显示 <em>cmd</em> 。</p>
+<p>然而，这可能会打出多个进程，因为进程和它的子进程会被同时打印出来。比方说用 <em>bash</em> 执行了一个 <em>shell</em> 脚本，脚本内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sleep <span class="m">3600</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果只显示父进程，那么结果是 <code>bash foo.sh</code>，并不能清楚知道脚本执行到哪了，我希望看到的是 <code>sleep 3600</code>，所以需要根据 <code>ps</code> 得到的结果，来获取子进程的 <em>cmd</em> 。</p>
+<p>由于平台不一样 <em>ps</em> 的实现也是不一样的。经过测试，<em>macOS</em> 和 <em>linux</em> 的 <code>ps</code> 打印出来的子进程顺序是相反的，所以两个平台要区分开来对待：<em>Darwin</em> 内核（也就是 <em>macOS</em> 的内核）的用 <code>tail -n 1</code>，<em>linux</em> 内核用 <code>head -n 1</code> 来获取子进程的 <em>cmd</em> 。</p>
+<p>关于命令中的 <code>sleep 0.25</code> 主要是因为，有时候会出现 <em>title</em> 失效不更新的情况，加入该命令可以极大的减少该情况的出现。</p>
+<h3 id="快速切换-session">快速切换 <em>session</em></h3>
+<p>同时打开的 <em>session</em> 有点多时，会很不方便切换。虽然 <em>tmux</em> 提供了 <kbd>prefix key</kbd> + <kbd>s</kbd> 来显示所有的 <em>session</em> 并且可以用方向键来选择切换。</p>
+<p>但还是不够好用，我想要的是像 <a href="https://contexts.co/" target="_blank" rel="noopener noreffer">Context</a> 一样的通过用 <em>session name</em> 来切换的功能，并且提供 fuzzy search，并在我打错字个别字时也能正常切换。</p>
+<p>这样我只要知道 <em>session name</em> ，闭着眼睛也能切换 <em>session</em> ，不用盯着屏幕看，不用在意 <em>session</em> 的排序位置。</p>
+<blockquote>
+<p>这个功能依赖 <a href="https://github.com/junegunn/fzf" target="_blank" rel="noopener noreffer">fzf</a> 中的 <em>fzf-tmux</em> 程序</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">bind-key s run-shell &#34;tmux list-sessions -F \&#34;##S\&#34; | fzf-tmux | xargs tmux switch -t; true&#34;
+bind-key S choose-tree -s
+</code></pre></td></tr></table>
+</div>
+</div><p>按下 <kbd>prefix key</kbd> + <kbd>s</kbd> ，你将会看到 <em>tmux</em> 跳出一个额外的 <em>pane</em> ，上面显示了所有的 <em>session</em> name。</p>
+<p><a href="https://i.loli.net/2019/02/23/5c70da5394a18.jpg" target="_blank" rel="noopener noreffer"><img
+        class="lazyload"
+        data-src="https://i.loli.net/2019/02/23/5c70da5394a18.jpg"
+        data-srcset="https://i.loli.net/2019/02/23/5c70da5394a18.jpg, https://i.loli.net/2019/02/23/5c70da5394a18.jpg 1.5x, https://i.loli.net/2019/02/23/5c70da5394a18.jpg 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2019/02/23/5c70da5394a18.jpg"
+        title="tmux show session"
+    /></a></p>
+<p>你可以通过方向键选择，也可以直接输入 <em>session</em> name，回车即可跳转到该 <em>session</em> 。</p>
+<p><a href="https://i.loli.net/2019/02/23/5c70da53a2813.jpg" target="_blank" rel="noopener noreffer"><img
+        class="lazyload"
+        data-src="https://i.loli.net/2019/02/23/5c70da53a2813.jpg"
+        data-srcset="https://i.loli.net/2019/02/23/5c70da53a2813.jpg, https://i.loli.net/2019/02/23/5c70da53a2813.jpg 1.5x, https://i.loli.net/2019/02/23/5c70da53a2813.jpg 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2019/02/23/5c70da53a2813.jpg"
+        title="tmux select session"
+    /></a></p>
+<p>有时候 <em>tmux</em> 自带的 <em>choose-tree</em> 也挺有用的，所以我把它的键位移到到了 <code>prefix key</code> + <code>S</code> 。</p>
+<h2 id="沙拉">沙拉</h2>
+<h3 id="tmux-滚动模式的坑">tmux 滚动模式的坑</h3>
+<p><em>tmux</em> 在进入 <em>copy mode</em> （查看 <em>pane</em> 历史）时，会暂停读取在 <em>pane</em> 中运行的 <em>tty</em> 的 <em>stdout</em> 和 <em>stderr</em> ，如果 <em>tty</em> 中的程序继续往标准输出中写入，那么操作系统的 <em>tty</em> 缓存最终会被填满。此时程序再写入时，为避免缓冲区溢出，操作系统会会阻塞该 IO 操作。此时该程序很有可能被阻塞，假如这个程序是个提供 web 服务的 server，那么它将停止响应所有的请求。</p>
+<p>目前 <em>tmux</em> 官方没有打算解决这个问题（可能是 <em>tmux</em> 实现原因），但有方法可以绕过这个坑。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Show history as scrollable view
+bind-key F capture-pane -S -10000 -b capture\; show-buffer -b capture\; send-keys G\; delete-buffer -b capture
+</code></pre></td></tr></table>
+</div>
+</div><p>原理是捕获当前历史，保存到 <em>tmux</em> buffer 中，然后再显示 buffer 的内容。这个方案和 <em>copy mode</em> 的区别就是会丢失 <em>shell</em> 中的颜色。（<em>tmux</em> <code>show-buffer</code> 命令不支持显示颜色）</p>
+<h3 id="保存历史到文件">保存历史到文件</h3>
+<p><em>tmux</em> 中的历史不能像普通的 <em>shell</em> 一样，可以通过滚动终端类软件的自带的历史记录来截取日志，假如要截取的日志很长一段，没法直接在一个页面中打印出来怎么办？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">bind-key P command-prompt -p &#39;save history to filename:&#39; -I &#39;~/tmux.history&#39; &#39;capture-pane -S -10000 -b capture ; save-buffer -b capture %1 ; delete-buffer -b capture&#39;
+</code></pre></td></tr></table>
+</div>
+</div><p>按下 <kbd>prefix key</kbd> + <kbd>P</kbd> 即可把历史记录保存到文件中，然后想怎么分析就怎么分析 xD 。</p>
+<h2 id="甜点">甜点</h2>
+<h3 id="继承当前目录">继承当前目录</h3>
+<p>打开一个新的 <em>pane</em> 或 <em>window</em> ，当前目录不会继承自上一个 <em>pane</em> ，每次都会在用户目录，挺不方便的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># -- Split with current direcotry --
+# Split panes horizontal
+bind-key &#39;%&#39; split-window -h -c &#39;#{pane_current_path}&#39;  
+# Split panes vertically
+bind-key &#39;&#34;&#39; split-window -v -c &#39;#{pane_current_path}&#39;
+# Create new window
+bind-key c new-window -c &#39;#{pane_current_path}&#39;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="插件管理">插件管理</h3>
+<p><a href="https://github.com/tmux-plugins/tpm" target="_blank" rel="noopener noreffer">tpm</a> 是 <em>tmux</em> 中的插件管理器，可以用来安装管理自己喜欢的 <em>tmux</em> 插件，非常方便。</p>
+<p>安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+</code></pre></td></tr></table>
+</div>
+</div><p>推荐些我用的插件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># =---- Plugins ----=</span>
+<span class="nb">set</span> -g @plugin <span class="s1">&#39;tmux-plugins/tpm&#39;</span>
+<span class="nb">set</span> -g @plugin <span class="s1">&#39;tmux-plugins/tmux-sensible&#39;</span>
+<span class="nb">set</span> -g @plugin <span class="s1">&#39;XSAM/tmux-themepack&#39;</span>
+
+<span class="c1"># Continuous saving tmux environments</span>
+<span class="nb">set</span> -g @plugin <span class="s1">&#39;tmux-plugins/tmux-resurrect&#39;</span>
+<span class="c1"># set -g @plugin &#39;tmux-plugins/tmux-continuum&#39;</span>
+<span class="c1"># =---- Plugins ----=</span>
+
+<span class="c1"># Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)</span>
+run -b <span class="s1">&#39;~/.tmux/plugins/tpm/tpm&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>tmux-plugins/tmux-sensible</code>：帮你配置了一些常规的设置</li>
+<li><code>XSAM/tmux-themepack</code>: 我改的主题（自认为还挺好看的 xD)</li>
+<li><code>tmux-plugins/tmux-resurrect</code>: 能保存 <em>tmux</em> 的 <em>session</em> 结构，这样关机重启之后，能马上恢复</li>
+</ul>
+<h2 id="咖啡茶">咖啡、茶</h2>
+<p>我维护了一个叫 <a href="https://github.com/XSAM/kinda-lazy" target="_blank" rel="noopener noreffer">kind-lazy</a> 的项目，提供一些程序的快速安装脚本，其中也有本文提到的 <em>tmux</em> 配置。</p>
+<p>快速安装 <em>tmux</em> ：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">git clone https://github.com/XSAM/kinda-lazy.git
+<span class="nb">cd</span> kinda-lazy/tmux
+bash lazy_install.sh
+</code></pre></td></tr></table>
+</div>
+</div><p>喜欢的话可以给项目点个 <em>Star</em> :satisfied:</p>
+<p>Enjoy!</p>
+<h1 id="ref">Ref</h1>
+<ul>
+<li><a href="http://man.openbsd.org/OpenBSD-current/man1/tmux.1" target="_blank" rel="noopener noreffer">http://man.openbsd.org/OpenBSD-current/man1/tmux.1</a></li>
+<li><a href="https://stackoverflow.com/questions/13924365/rails-freezes-when-searching-through-tmux-output-buffer" target="_blank" rel="noopener noreffer">https://stackoverflow.com/questions/13924365/rails-freezes-when-searching-through-tmux-output-buffer</a></li>
+<li><a href="https://github.com/tmux/tmux/issues/431" target="_blank" rel="noopener noreffer">https://github.com/tmux/tmux/issues/431</a></li>
+<li><a href="https://unix.stackexchange.com/questions/26548/write-all-tmux-scrollback-to-a-file" target="_blank" rel="noopener noreffer">https://unix.stackexchange.com/questions/26548/write-all-tmux-scrollback-to-a-file</a></li>
+<li><a href="https://github.com/junegunn/fzf/blob/master/bin/fzf-tmux" target="_blank" rel="noopener noreffer">https://github.com/junegunn/fzf/blob/master/bin/fzf-tmux</a></li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2019-02-23</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/tmux/">tmux</a></section>
+        <section>
+            <span><a href="#" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/tmux-guide-1/" class="prev" rel="prev" title="tmux 简易指南（一）"><i class="fas fa-angle-left fa-fw"></i>tmux 简易指南（一）</a>
+            <a href="/posts/yubikey-with-ssh/" class="next" rel="next" title="Yubikey with SSH">Yubikey with SSH<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.87.0">Hugo</a> | Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2018 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sam Xie</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/fuse/fuse.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="https://samxie.disqus.com/embed.js" defer></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"No results found","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false}};</script><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></div>
+</body>
+
+</html>

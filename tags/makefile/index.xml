@@ -1,29 +1,18 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Makefile on Casually Typing Like a Monkey</title>
-    <link>https://samxie.me/tags/makefile/</link>
-    <description>Recent content in Makefile on Casually Typing Like a Monkey</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Fri, 27 Apr 2018 13:35:25 +0800</lastBuildDate>
-    
-	<atom:link href="https://samxie.me/tags/makefile/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Makefile 基础教程</title>
-      <link>https://samxie.me/post/makefile-basic-tutorial/</link>
-      <pubDate>Fri, 27 Apr 2018 13:35:25 +0800</pubDate>
-      
-      <guid>https://samxie.me/post/makefile-basic-tutorial/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;本文内容来自对 &lt;a href=&#34;https://gist.github.com/isaacs/62a2d1825d04437c6f08&#34;&gt;isaacs/Makefile&lt;/a&gt; 的翻译、修改和补充。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Hello, 这是个 &lt;code&gt;Makefile&lt;/code&gt; 的基础教程。
-你将在这学到为什么 &lt;code&gt;make&lt;/code&gt; 命令如此受欢迎。尽管它有着奇怪的语法，但实际上它的表达能力强而且高效，应对构建程序任务时它是个强有力的解决方案。&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Makefile - Tag - Casually Typing Like a Monkey</title>
+        <link>https://samxie.me/tags/makefile/</link>
+        <description>Makefile - Tag - Casually Typing Like a Monkey</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 27 Apr 2018 13:35:25 &#43;0800</lastBuildDate><atom:link href="https://samxie.me/tags/makefile/" rel="self" type="application/rss+xml" /><item>
+    <title>Makefile 基础教程</title>
+    <link>https://samxie.me/posts/makefile-basic-tutorial/</link>
+    <pubDate>Fri, 27 Apr 2018 13:35:25 &#43;0800</pubDate><author>
+        <name>Sam Xie</name>
+    </author><guid>https://samxie.me/posts/makefile-basic-tutorial/</guid>
+    <description><![CDATA[<blockquote>
+<p>本文内容来自对 <a href="https://gist.github.com/isaacs/62a2d1825d04437c6f08" target="_blank" rel="noopener noreffer">isaacs/Makefile</a> 的翻译、修改和补充。</p>
+</blockquote>
+<p>Hello, 这是个 <code>Makefile</code> 的基础教程。
+你将在这学到为什么 <code>make</code> 命令如此受欢迎。尽管它有着奇怪的语法，但实际上它的表达能力强而且高效，应对构建程序任务时它是个强有力的解决方案。</p>]]></description>
+</item></channel>
 </rss>

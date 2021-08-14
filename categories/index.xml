@@ -1,23 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Categories on Casually Typing Like a Monkey</title>
-    <link>https://samxie.me/categories/</link>
-    <description>Recent content in Categories on Casually Typing Like a Monkey</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    
-	<atom:link href="https://samxie.me/categories/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Programming</title>
-      <link>https://samxie.me/categories/programming/</link>
-      <pubDate>Sat, 23 Feb 2019 14:47:00 +0800</pubDate>
-      
-      <guid>https://samxie.me/categories/programming/</guid>
-      <description></description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Categories - Category - Casually Typing Like a Monkey</title>
+        <link>https://samxie.me/categories/</link>
+        <description>Categories - Category - Casually Typing Like a Monkey</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 23 Feb 2019 14:47:00 &#43;0800</lastBuildDate><atom:link href="https://samxie.me/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>Programming</title>
+    <link>https://samxie.me/categories/programming/</link>
+    <pubDate>Sat, 23 Feb 2019 14:47:00 &#43;0800</pubDate><author>
+        <name>Sam Xie</name>
+    </author><guid>https://samxie.me/categories/programming/</guid>
+    <description><![CDATA[]]></description>
+</item></channel>
 </rss>
