@@ -13,7 +13,7 @@ Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到�
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://samxie.me/posts/yubikey-with-ssh/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-01-03T23:31:26+08:00" />
-<meta property="article:modified_time" content="2020-01-03T23:31:26+08:00" />
+<meta property="article:modified_time" content="2022-01-28T18:19:00+08:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Yubikey with SSH"/>
@@ -37,8 +37,8 @@ Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到�
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/samxie.me\/posts\/yubikey-with-ssh\/"
-        },"genre": "posts","keywords": "Yubikey, GPG, SSH","wordcount":  305 ,
-        "url": "https:\/\/samxie.me\/posts\/yubikey-with-ssh\/","datePublished": "2020-01-03T23:31:26+08:00","dateModified": "2020-01-03T23:31:26+08:00","publisher": {
+        },"genre": "posts","keywords": "Yubikey, GPG, SSH","wordcount":  302 ,
+        "url": "https:\/\/samxie.me\/posts\/yubikey-with-ssh\/","datePublished": "2020-01-03T23:31:26+08:00","dateModified": "2022-01-28T18:19:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -135,7 +135,7 @@ Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到�
             <div class="post-meta-line">
                 <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sam Xie</a>
                 </span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-01-03">2020-01-03</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2020-01-03">2020-01-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;305 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-01-03">2020-01-03</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2022-01-28">2022-01-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;302 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -196,7 +196,7 @@ gpg-connect-agent updatestartuptty /bye
 <span class="nb">export</span> <span class="nv">SSH_AUTH_SOCK</span><span class="o">=</span><span class="k">$(</span>gpgconf --list-dirs agent-ssh-socket<span class="k">)</span>
 
 <span class="k">function</span> gpg_ssh_clear<span class="o">()</span> <span class="o">{</span>
-    <span class="nv">keys</span><span class="o">=</span><span class="k">$(</span>gpg-connect-agent <span class="s1">&#39;keyinfo --ssh-list --ssh-fpr&#39;</span> /bye <span class="p">|</span> grep MD5 <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span> <span class="p">|</span> head<span class="k">)</span>
+    <span class="nv">keys</span><span class="o">=</span><span class="k">$(</span>gpg-connect-agent <span class="s1">&#39;keyinfo --ssh-list --ssh-fpr&#39;</span> /bye <span class="p">|</span> grep KEYINFO <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span> <span class="p">|</span> head<span class="k">)</span>
     <span class="k">for</span> key in <span class="nv">$keys</span><span class="p">;</span> <span class="k">do</span> gpg-connect-agent <span class="s2">&#34;delete_key </span><span class="nv">$key</span><span class="s2"> --force&#34;</span> /bye<span class="p">;</span> <span class="k">done</span>
 <span class="o">}</span>
 </code></pre></td></tr></table>
@@ -211,11 +211,9 @@ gpg-connect-agent updatestartuptty /bye
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">pinentry-program /usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac
-enable-ssh-support
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">enable-ssh-support
 write-env-file
 use-standard-socket
 default-cache-ttl <span class="m">600</span>
@@ -292,7 +290,7 @@ gpg-connect-agent /bye
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2020-01-03</span>
+                <span>Updated on 2022-01-28</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -317,8 +315,8 @@ gpg-connect-agent /bye
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
             </noscript></div></article></div>
         </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.87.0">Hugo</a> | Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2018 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sam Xie</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.1">Hugo</a> | Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2018 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sam Xie</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div></footer></div>
 
     <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
