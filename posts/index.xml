@@ -3,7 +3,17 @@
         <title>All Posts - Casually Typing Like a Monkey</title>
         <link>https://samxie.me/posts/</link>
         <description>All Posts | Casually Typing Like a Monkey</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 03 Jan 2020 23:31:26 &#43;0800</lastBuildDate><atom:link href="https://samxie.me/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 25 Aug 2023 22:47:43 &#43;0000</lastBuildDate><atom:link href="https://samxie.me/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Docker Desktop alternatives for macOS</title>
+    <link>https://samxie.me/posts/docker-desktop-alternatives-for-macos/</link>
+    <pubDate>Fri, 25 Aug 2023 22:47:43 &#43;0000</pubDate><author>
+        <name>Sam Xie</name>
+    </author><guid>https://samxie.me/posts/docker-desktop-alternatives-for-macos/</guid>
+    <description><![CDATA[<blockquote>
+<p>This is a convenient note to check steps without logging personal stuff on my work computer. I hope it can help you too.</p>
+</blockquote>
+<p>As Docker Desktop updated its license to <a href="https://www.docker.com/legal/docker-subscription-service-agreement" target="_blank" rel="noopener noreffer">Docker Subscription Service Agreement</a> and is no longer free for professional use, I decided to find alternatives for Docker Desktop on macOS.</p>]]></description>
+</item><item>
     <title>Yubikey with SSH</title>
     <link>https://samxie.me/posts/yubikey-with-ssh/</link>
     <pubDate>Fri, 03 Jan 2020 23:31:26 &#43;0800</pubDate><author>

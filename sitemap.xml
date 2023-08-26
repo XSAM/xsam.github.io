@@ -2,13 +2,19 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://samxie.me/</loc><lastmod>2022-01-28T18:19:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://samxie.me/tags/gpg/</loc><lastmod>2022-01-28T18:19:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://samxie.me/posts/</loc><lastmod>2022-01-28T18:19:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://samxie.me/tags/ssh/</loc><lastmod>2022-01-28T18:19:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://samxie.me/tags/</loc><lastmod>2022-01-28T18:19:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://samxie.me/tags/yubikey/</loc><lastmod>2022-01-28T18:19:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://samxie.me/posts/yubikey-with-ssh/</loc><lastmod>2022-01-28T18:19:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://samxie.me/tags/arm64/</loc><lastmod>2023-08-25T22:47:43&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://samxie.me/</loc><lastmod>2023-08-25T22:47:43&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://samxie.me/tags/colima/</loc><lastmod>2023-08-25T22:47:43&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://samxie.me/tags/docker/</loc><lastmod>2023-08-25T22:47:43&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://samxie.me/tags/docker-desktop/</loc><lastmod>2023-08-25T22:47:43&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://samxie.me/posts/docker-desktop-alternatives-for-macos/</loc><lastmod>2023-08-25T22:47:43&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://samxie.me/tags/macos/</loc><lastmod>2023-08-25T22:47:43&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://samxie.me/posts/</loc><lastmod>2023-08-25T22:47:43&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://samxie.me/tags/</loc><lastmod>2023-08-25T22:47:43&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://samxie.me/tags/gpg/</loc><lastmod>2022-01-28T18:19:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://samxie.me/tags/ssh/</loc><lastmod>2022-01-28T18:19:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://samxie.me/tags/yubikey/</loc><lastmod>2022-01-28T18:19:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://samxie.me/posts/yubikey-with-ssh/</loc><lastmod>2022-01-28T18:19:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://samxie.me/categories/</loc><lastmod>2020-02-10T15:46:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://samxie.me/categories/programming/</loc><lastmod>2020-02-10T15:46:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://samxie.me/tags/tmux/</loc><lastmod>2020-02-10T15:46:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

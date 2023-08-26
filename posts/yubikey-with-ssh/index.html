@@ -14,7 +14,6 @@ Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到�
 <meta property="og:url" content="https://samxie.me/posts/yubikey-with-ssh/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-01-03T23:31:26+08:00" />
 <meta property="article:modified_time" content="2022-01-28T18:19:00+08:00" />
-
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Yubikey with SSH"/>
 <meta name="twitter:description" content="最近入手了一个 Yubikey，其中用来做 SSH 登录。一路操作下来，踩不少坑，等到终于使用 Yubikey 中的 Authentication key 登录上机器后发现：
@@ -26,7 +25,7 @@ Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到�
 
 <meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://samxie.me/posts/yubikey-with-ssh/" /><link rel="prev" href="https://samxie.me/posts/tmux-guide-2/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://samxie.me/posts/yubikey-with-ssh/" /><link rel="prev" href="https://samxie.me/posts/tmux-guide-2/" /><link rel="next" href="https://samxie.me/posts/docker-desktop-alternatives-for-macos/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><meta name="google-site-verification" content="vq0HEt1rnOOztPmqqNORsLauJwH1nSfLOtF5f0IUmrc" /><script type="application/ld+json">
     {
@@ -37,7 +36,7 @@ Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到�
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/samxie.me\/posts\/yubikey-with-ssh\/"
-        },"genre": "posts","keywords": "Yubikey, GPG, SSH","wordcount":  302 ,
+        },"genre": "posts","keywords": "Yubikey, GPG, SSH","wordcount":  303 ,
         "url": "https:\/\/samxie.me\/posts\/yubikey-with-ssh\/","datePublished": "2020-01-03T23:31:26+08:00","dateModified": "2022-01-28T18:19:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -135,7 +134,7 @@ Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到�
             <div class="post-meta-line">
                 <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sam Xie</a>
                 </span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-01-03">2020-01-03</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2022-01-28">2022-01-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;302 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-01-03">2020-01-03</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2022-01-28">2022-01-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;303 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -189,17 +188,17 @@ Yubikey 自带 key 的这个优势（杂耍）体现不出来呀，总不能到�
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># GPG ssh support</span>
-<span class="nb">export</span> <span class="nv">GPG_TTY</span><span class="o">=</span><span class="k">$(</span>tty<span class="k">)</span>
-gpg-connect-agent updatestartuptty /bye
-<span class="nb">unset</span> SSH_AGENT_PID
-<span class="nb">export</span> <span class="nv">SSH_AUTH_SOCK</span><span class="o">=</span><span class="k">$(</span>gpgconf --list-dirs agent-ssh-socket<span class="k">)</span>
-
-<span class="k">function</span> gpg_ssh_clear<span class="o">()</span> <span class="o">{</span>
-    <span class="nv">keys</span><span class="o">=</span><span class="k">$(</span>gpg-connect-agent <span class="s1">&#39;keyinfo --ssh-list --ssh-fpr&#39;</span> /bye <span class="p">|</span> grep KEYINFO <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span> <span class="p">|</span> head<span class="k">)</span>
-    <span class="k">for</span> key in <span class="nv">$keys</span><span class="p">;</span> <span class="k">do</span> gpg-connect-agent <span class="s2">&#34;delete_key </span><span class="nv">$key</span><span class="s2"> --force&#34;</span> /bye<span class="p">;</span> <span class="k">done</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># GPG ssh support</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">GPG_TTY</span><span class="o">=</span><span class="k">$(</span>tty<span class="k">)</span>
+</span></span><span class="line"><span class="cl">gpg-connect-agent updatestartuptty /bye
+</span></span><span class="line"><span class="cl"><span class="nb">unset</span> SSH_AGENT_PID
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">SSH_AUTH_SOCK</span><span class="o">=</span><span class="k">$(</span>gpgconf --list-dirs agent-ssh-socket<span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">function</span> gpg_ssh_clear<span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">keys</span><span class="o">=</span><span class="k">$(</span>gpg-connect-agent <span class="s1">&#39;keyinfo --ssh-list --ssh-fpr&#39;</span> /bye <span class="p">|</span> grep KEYINFO <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span> <span class="p">|</span> head<span class="k">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> key in <span class="nv">$keys</span><span class="p">;</span> <span class="k">do</span> gpg-connect-agent <span class="s2">&#34;delete_key </span><span class="nv">$key</span><span class="s2"> --force&#34;</span> /bye<span class="p">;</span> <span class="k">done</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>gpg-agent</strong> 有模拟 OpenSSH agent 的功能，所以可以用 <strong>gpg-agent</strong> 替代 <strong>ssh-agent</strong>，设置 <code>SSH_AUTH_SOCK</code> 和 <code>SSH_AGENT_PID</code> 以达成目的。</p>
 <p>使用 <strong>gpg-agent</strong> cache SSH key 后，<code>ssh-add -D</code> 将不再起作用，如果需要删除 <strong>gpg-agent</strong> cache 的 key，得使用 <code>gpg-connect-agent</code>。所以我写了个函数，拿出所有的 <strong>gpg-agent</strong> cache 的 SSH key，并删除。想清理时，执行 <code>gpg_ssh_clear</code> 即可。（并不会清除 Yubikey 里面的 key）</p>
@@ -213,12 +212,12 @@ gpg-connect-agent updatestartuptty /bye
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">enable-ssh-support
-write-env-file
-use-standard-socket
-default-cache-ttl <span class="m">600</span>
-max-cache-ttl <span class="m">7200</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">enable-ssh-support
+</span></span><span class="line"><span class="cl">write-env-file
+</span></span><span class="line"><span class="cl">use-standard-socket
+</span></span><span class="line"><span class="cl">default-cache-ttl <span class="m">600</span>
+</span></span><span class="line"><span class="cl">max-cache-ttl <span class="m">7200</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>pinentry-program</code> 这边给出的是 <em>macOS</em> 的示例，其他的 OS 可以参考这个<a href="https://unix.stackexchange.com/questions/236746/change-pinentry-program-temporarily-with-gpg-agent" target="_blank" rel="noopener noreffer">回答</a>。</p>
 <h2 id="拿到表演钥匙">拿到表演钥匙</h2>
@@ -235,8 +234,8 @@ max-cache-ttl <span class="m">7200</span>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">ykman openpgp set-touch aut on
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ykman openpgp set-touch aut on
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这样每次 <code>ssh</code> 用到 Yubikey 的 key 授权时，Yubikey 的指示灯都会一闪一闪表示需要触碰才能完成操作。</p>
 <blockquote>
@@ -264,21 +263,21 @@ max-cache-ttl <span class="m">7200</span>
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Reload</span>
-gpgconf --reload gpg-agent
-
-<span class="c1"># Kill</span>
-gpgconf --kill gpg-agent
-
-<span class="c1"># List options</span>
-gpgconf --list-options gpg-agent
-
-<span class="c1"># This is an undocumented command to export ssh public key</span>
-pgp --export-ssh-key &lt;Key ID&gt;
-
-<span class="c1"># Quickly start gpg-agent</span>
-gpg-connect-agent /bye
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Reload</span>
+</span></span><span class="line"><span class="cl">gpgconf --reload gpg-agent
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Kill</span>
+</span></span><span class="line"><span class="cl">gpgconf --kill gpg-agent
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># List options</span>
+</span></span><span class="line"><span class="cl">gpgconf --list-options gpg-agent
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># This is an undocumented command to export ssh public key</span>
+</span></span><span class="line"><span class="cl">pgp --export-ssh-key &lt;Key ID&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Quickly start gpg-agent</span>
+</span></span><span class="line"><span class="cl">gpg-connect-agent /bye
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="参考">参考</h2>
 <ul>
@@ -309,14 +308,15 @@ gpg-connect-agent /bye
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/tmux-guide-2/" class="prev" rel="prev" title="tmux 简易指南（二）"><i class="fas fa-angle-left fa-fw"></i>tmux 简易指南（二）</a></div>
+    <div class="post-nav"><a href="/posts/tmux-guide-2/" class="prev" rel="prev" title="tmux 简易指南（二）"><i class="fas fa-angle-left fa-fw"></i>tmux 简易指南（二）</a>
+            <a href="/posts/docker-desktop-alternatives-for-macos/" class="next" rel="next" title="Docker Desktop alternatives for macOS">Docker Desktop alternatives for macOS<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
             </noscript></div></article></div>
         </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.1">Hugo</a> | Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2018 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sam Xie</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.117.0">Hugo</a> | Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2018 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sam Xie</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div></footer></div>
 
     <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">

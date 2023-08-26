@@ -3,7 +3,42 @@
         <title>Tags - Tag - Casually Typing Like a Monkey</title>
         <link>https://samxie.me/tags/</link>
         <description>Tags - Tag - Casually Typing Like a Monkey</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 03 Jan 2020 23:31:26 &#43;0800</lastBuildDate><atom:link href="https://samxie.me/tags/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 25 Aug 2023 22:47:43 &#43;0000</lastBuildDate><atom:link href="https://samxie.me/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>ARM64</title>
+    <link>https://samxie.me/tags/arm64/</link>
+    <pubDate>Fri, 25 Aug 2023 22:47:43 &#43;0000</pubDate><author>
+        <name>Sam Xie</name>
+    </author><guid>https://samxie.me/tags/arm64/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Colima</title>
+    <link>https://samxie.me/tags/colima/</link>
+    <pubDate>Fri, 25 Aug 2023 22:47:43 &#43;0000</pubDate><author>
+        <name>Sam Xie</name>
+    </author><guid>https://samxie.me/tags/colima/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Docker</title>
+    <link>https://samxie.me/tags/docker/</link>
+    <pubDate>Fri, 25 Aug 2023 22:47:43 &#43;0000</pubDate><author>
+        <name>Sam Xie</name>
+    </author><guid>https://samxie.me/tags/docker/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Docker Desktop</title>
+    <link>https://samxie.me/tags/docker-desktop/</link>
+    <pubDate>Fri, 25 Aug 2023 22:47:43 &#43;0000</pubDate><author>
+        <name>Sam Xie</name>
+    </author><guid>https://samxie.me/tags/docker-desktop/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>macOS</title>
+    <link>https://samxie.me/tags/macos/</link>
+    <pubDate>Fri, 25 Aug 2023 22:47:43 &#43;0000</pubDate><author>
+        <name>Sam Xie</name>
+    </author><guid>https://samxie.me/tags/macos/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>GPG</title>
     <link>https://samxie.me/tags/gpg/</link>
     <pubDate>Fri, 03 Jan 2020 23:31:26 &#43;0800</pubDate><author>
@@ -37,13 +72,6 @@
     <pubDate>Fri, 27 Apr 2018 13:35:25 &#43;0800</pubDate><author>
         <name>Sam Xie</name>
     </author><guid>https://samxie.me/tags/makefile/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Started</title>
-    <link>https://samxie.me/tags/started/</link>
-    <pubDate>Sat, 20 Jan 2018 17:03:25 &#43;0800</pubDate><author>
-        <name>Sam Xie</name>
-    </author><guid>https://samxie.me/tags/started/</guid>
     <description><![CDATA[]]></description>
 </item></channel>
 </rss>
